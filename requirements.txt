@@ -1,4 +1,4 @@
-requests
-pyqt5
-mysql-connector-python		# do not use mysql-connector
-configparser
+Flask
+flask_sqlalchemy
+psycopg2
+pycodestyle
