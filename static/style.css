@@ -34,6 +34,8 @@ body {
     word-wrap: break-word;
     border: 1px solid black;
     overflow: auto;
+
+    background-color: lightgrey;
 }
 
 #dialog {
@@ -49,4 +51,16 @@ body {
 
 #zuser_input_form {
     width: 100%;
+}
+
+.query_style {
+
+    color: darkblue;
+    text-align: right;
+}
+
+.reply_style {
+
+    color: salmon;
+    text-align: left;
 }
