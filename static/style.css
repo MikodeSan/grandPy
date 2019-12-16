@@ -1,0 +1,21 @@
+/*
+style.css
+---------
+ 
+Par Mathieu Nebra
+*/
+
+h1, em
+{
+    color: darkblue;
+}
+
+.introduction*
+{
+    color: darkorange;
+}
+
+#zheader_2
+{
+    color: darksalmon;
+}
