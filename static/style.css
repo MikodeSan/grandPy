@@ -1,21 +1,52 @@
 /*
 style.css
 ---------
- 
-Par Mathieu Nebra
 */
 
-h1, em
-{
-    color: darkblue;
+header,
+footer {
+    background-color: chartreuse;
 }
 
-.introduction*
-{
+body {
+    background-color: coral;
+}
+
+#app_section {
+    background-color: chocolate;
+}
+
+.introduction* {
     color: darkorange;
 }
 
-#zheader_2
-{
+#zheader_2 {
     color: darksalmon;
+}
+
+.app_div {
+    width: 50%;
+    min-width: 400px;
+    /* Marge intérieure de 12px */
+    padding: 12px;
+    margin: auto;
+    margin-bottom: 12px;
+    word-wrap: break-word;
+    border: 1px solid black;
+    overflow: auto;
+}
+
+#dialog {
+    min-height: 200px;
+    max-height: 600px;
+    text-align: justify;
+}
+
+#user_input {
+    height: 24px;
+    text-align: right;
+}
+
+#zuser_input_form {
+    width: 100%;
 }
