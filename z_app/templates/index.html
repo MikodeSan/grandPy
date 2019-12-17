@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="utf-8" />
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="../static/css/style.css"/>
   <title>ZGrandPy</title>
 </head>
 
@@ -61,7 +61,7 @@
     <p class="introduction">Welcome <em>Buddy</em> ! <br />
       I'm <strong>glad</strong> to see you today :)<br />
 
-      <img src="profile.png" alt="GrandPy Bot Pics" title="My name is Py, GrandPy ;) !" /><br />
+      <img src={{ url_for('static', filename='img/profile.png') }} alt="GrandPy Bot Pics" title="My name is Py, GrandPy ;) !" /><br />
 
       Do you want to <mark>come</mark> with me ? <a href="zapp.html">Start here</a><br />
     </p>
@@ -80,7 +80,7 @@
   <footer>
     Check my
     <a href="https://www.linkedin.com/in/mickaël-toussaint-923004135" target="_blank">
-      <img src="linkedin_32.png" alt="LinkedIn" title="My public LinkedIn profile" /></a>
+      <img src={{ url_for('static', filename='img/linkedin_32.png') }} alt="LinkedIn" title="My public LinkedIn profile" /></a>
 
 
 
