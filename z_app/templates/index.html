@@ -1,29 +1,6 @@
-<!DOCTYPE html>
-<html>
+{% extends 'base.html' %} {% block myblock %} {% include 'header.html' %}
 
-<head>
-  <meta charset="utf-8" />
-  <link rel="stylesheet" href="../static/css/style.css"/>
-  <title>ZGrandPy</title>
-</head>
-
-<body>
-
-  <header>
-    <p>The header</p>
-  </header>
-
-  <nav>
-    <p>The Nav</p>
-
-    <ul>
-      <li><a href="index.html">Accueil</a></li>
-      <li><a href="forum.html">Forum</a></li>
-      <li><a href="contact.html">Contact</a></li>
-    </ul>
-  </nav>
-
-  <section id="section_01">
+<section id="section_01">
 
     <p>The Section 1</p>
 
@@ -31,26 +8,26 @@
     <p>Bla bla bla bla</p>
 
     <article>
-      <h1>Mon article</h1>
-      <p>Bla bla bla bla</p>
+        <h1>Mon article</h1>
+        <p>Bla bla bla bla</p>
     </article>
 
     <aside>
-      <!-- Placez ici des informations complémentaires -->
+        <!-- Placez ici des informations complémentaires -->
     </aside>
 
-  </section>
+</section>
 
-  <section id="section_02">
+<section id="section_02">
 
     <p>The Section 2</p>
 
     <h1>Ma section de page</h1>
     <p>Bla bla bla bla</p>
 
-  </section>
+</section>
 
-  <div>
+<div>
 
     <p>The Div 1</p>
 
@@ -58,34 +35,19 @@
     <h1 id="zheader_1">ZGrandPy Bot</h1>
 
     <!-- Ceci est un commentaire -->
-    <p class="introduction">Welcome <em>Buddy</em> ! <br />
-      I'm <strong>glad</strong> to see you today :)<br />
+    <p class="introduction">Welcome <em>Buddy</em> ! <br /> I'm <strong>glad</strong> to see you today :)<br />
 
-      <img src={{ url_for('static', filename='img/profile.png') }} alt="GrandPy Bot Pics" title="My name is Py, GrandPy ;) !" /><br />
-
-      Do you want to <mark>come</mark> with me ? <a href="zapp.html">Start here</a><br />
+        <img src={{ url_for( 'static', filename='img/profile.png' ) }} alt="GrandPy Bot Pics" title="My name is Py, GrandPy ;) !" /><br /> Do you want to <mark>come</mark> with me ? <a href="zapp.html">Start here</a><br />
     </p>
 
-    <p>You can send a message to my <a href="mailto:miket972@gmail.com">contact</a>
-      or check my personal
-      <a href="https://www.linkedin.com/in/mickaël-toussaint-923004135" title="Web site" target="_blank">
+    <p>You can send a message to my <a href="mailto:miket972@gmail.com">contact</a> or check my personal
+        <a href="https://www.linkedin.com/in/mickaël-toussaint-923004135" title="Web site" target="_blank">
         Web site</a>
     </p>
 
     <h2 id="zheader_2">Bye !</h2>
     <p>See you later</p>
 
-  </div>
+</div>
 
-  <footer>
-    Check my
-    <a href="https://www.linkedin.com/in/mickaël-toussaint-923004135" target="_blank">
-      <img src={{ url_for('static', filename='img/linkedin_32.png') }} alt="LinkedIn" title="My public LinkedIn profile" /></a>
-
-
-
-  </footer>
-
-</body>
-
-</html>
+{% endblock %}

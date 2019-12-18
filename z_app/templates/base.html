@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../static/css/style.css" />
+    <title>ZBot</title>
+
+</head>
+
+<body>
+
+    {% block myblock %}{% endblock %}
+
+    <footer>
+        Check my
+        <a href="https://www.linkedin.com/in/mickaël-toussaint-923004135" target="_blank">
+            <img src={{ url_for( 'static', filename='img/linkedin_32.png' ) }} alt="LinkedIn" title="My public LinkedIn profile" /></a>
+
+    </footer>
+
+</body>
+
+</html>
