@@ -1,4 +1,4 @@
-from flask import Flask, render_template, url_for, request
+from flask import Flask, render_template, url_for, request, jsonify
 
 app = Flask(__name__)
 
@@ -19,12 +19,24 @@ def index():
                             # blur=True)
 
 @app.route('/zapp/')
-@app.route('/zapp.html/')
 def zapp():
 
+    content = request.json
+    print(content)
+
+    data = request.get_json()
+    print(data)
+
     user_name = request.args.get('user_name')
+    # user_name = data.get('strUserQuery')
+
     return render_template('zapp.html',
                             user_name=user_name)
+
+@app.route('/contents/<content_id>/')
+def content(content_id):
+    # return '%s' % content_id
+    return jsonify({'foo':"tutu"})
 
 
 if __name__ == "__main__":
