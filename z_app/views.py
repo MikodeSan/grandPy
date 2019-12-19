@@ -41,11 +41,11 @@ def zapp():
 def content():
 
     data = request.form
-    print(data)
+    print(data['query_text'])
 
     # return jsonify(data)
 
-    return jsonify({'foo': "tutu"})
+    return jsonify(data)
 
 
 @app.route('/contents/<content_id>/')

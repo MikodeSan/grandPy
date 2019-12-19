@@ -46,7 +46,6 @@ userInput_form.addEventListener('submit', function(event) {
         addQuery(strUserText);
         addReply(strUserText);
     }
-    userText_form.value = "";
 
     let user_Object = {
         my_query: strUserText
@@ -63,16 +62,19 @@ userInput_form.addEventListener('submit', function(event) {
             // Appelle la fonction callback en lui passant la réponse de la requête 
             console.log(req.responseText);
         } else {
-            console.error(req.status + " " + req.statusText + " " + url);
+            console.error(req.status + " " + req.statusText + " ToTo");
         }
     });
     req.addEventListener("error", function() {
         console.error("Erreur réseau avec l'URL " + url);
     });
 
-    req.open("POST", "http://127.0.0.1:5000/content");
+    req.open("POST", "http://127.0.0.1:5000/content/");
     // Envoi de la requête en y incluant l'objet
     req.send(formData);
+
+    userText_form.value = "";
+
 
     // let request = new XMLHttpRequest();
     // request.open("POST", "http://127.0.0.1:5000/content/");
