@@ -16,11 +16,11 @@
         <form id="user_input_form">
             <p><label for="query_text">Votre pseudo</label> :
                 <input type="text" name="query_text" id="query_text" placeholder="Your query ..." size="120" maxlength="512" />
-                <input type="image" id="submitImage" src="paper-plane-icon.png" alt="Submit" title="Submit query" height="24" width="24"></p>
+                <input type="image" id="submitImage" src="{{url_for('static', filename='img/paper-plane-icon.png')}}" alt="Submit" title="Submit query" height="24" width="24"></p>
         </form>
     </div>
 </section>
 
-<script src="../static/zapp.js"></script>
+<script type="text/javascript" src="{{url_for('static', filename='js/zapp.js')}}"></script>
 
 {% endblock %}

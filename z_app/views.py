@@ -18,14 +18,17 @@ def index():
                             # description=description,
                             # blur=True)
 
-@app.route('/zapp/')
+@app.route('/zapp/', methods=['GET', 'POST'])
 def zapp():
 
-    content = request.json
-    print(content)
+    # content = request.json
+    # print(content)
 
-    data = request.get_json()
-    print(data)
+    # data = request.get_json()
+    # print(data)
+
+    # data = request.form
+    # print(data)
 
     user_name = request.args.get('user_name')
     # user_name = data.get('strUserQuery')
@@ -33,8 +36,20 @@ def zapp():
     return render_template('zapp.html',
                             user_name=user_name)
 
+
+@app.route('/content/', methods=['GET', 'POST'])
+def content():
+
+    data = request.form
+    print(data)
+
+    # return jsonify(data)
+
+    return jsonify({'foo': "tutu"})
+
+
 @app.route('/contents/<content_id>/')
-def content(content_id):
+def contents(content_id):
     # return '%s' % content_id
     return jsonify({'foo':"tutu"})
 
