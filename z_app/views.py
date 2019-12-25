@@ -1,4 +1,5 @@
 from flask import Flask, render_template, url_for, request, jsonify
+import requests
 
 app = Flask(__name__)
 
@@ -43,9 +44,26 @@ def content():
     data = request.form
     print(data['query_text'])
 
-    # return jsonify(data)
+    address_url = 'https://maps.googleapis.com/maps/api/geocode/json?address=place+de+la+coméde&key=AIzaSyAvVZSBIzuKvUREct8yRbmIAUJI2Ii_b3k'
 
-    return jsonify(data)
+    response = requests.get(address_url)
+    if response.status_code == 200:
+        address_dict = response.json()
+        if address_dict['results'] and address_dict['status'] == "OK":
+            data = address_dict['results'][0]
+            # print(data['formatted_address'] + " " + data['geometry']['location']['lat'] + data['geometry']['location']['lng'])
+            print(data['formatted_address'])
+        else:
+            print('address not found')
+    else:
+        print('google reply error')
+
+    return address_dict
+
+    # return jsonify(data)
+    # return render_template('index.html')
+
+    # return jsonify(data)
 
 
 @app.route('/contents/<content_id>/')

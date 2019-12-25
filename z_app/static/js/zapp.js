@@ -38,8 +38,10 @@ getAddress = (address_json) => {
     console.log(address_json);
     addr = JSON.parse(address_json);
 
-    reply = "the reply" + " " + addr.query_text
-    console.log(reply);
+    data = addr.results[0]
+    zaddr = data.formatted_address
+
+    reply = "formatted address " + zaddr + " @ " + "{lat.: " + data.geometry.location.lat + "; long.: " + data.geometry.location.lng
 
     addReply(reply);
 }
