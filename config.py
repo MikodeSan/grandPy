@@ -12,7 +12,7 @@ from sqlalchemy import create_engine
 # >>> "".join([random.choice(string.printable) for _ in range(24)])
 SECRET_KEY = "#d#JCqTTW\nilK\\7m\x0bp#\tj~#H"
 
-FB_APP_ID = 1200420960103822
+FB_APP_ID = 2783332485018666
 
 # Database initialization
 basedir = os.path.abspath(os.path.dirname(__file__))
