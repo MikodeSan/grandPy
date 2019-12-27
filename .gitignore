@@ -159,6 +159,7 @@ _ReSharper*/
 packages/
 
 #misc.
+tmp/
 /dat/im/
 fbapp/static/*.jpg
 app.db

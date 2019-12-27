@@ -18,12 +18,10 @@ ZPARSER_URI = 'parse'
 
 # Database initialization
 if os.environ.get('DATABASE_URL'):
-    print('Hello Prod.')
     # ZSERVER_URL = "http://z-grand-py.herokuapp.com"
 
     SQLALCHEMY_DATABASE_URI = os.environ['DATABASE_URL']
 else:
-    print('Hello Dev.')
     # ZSERVER_URL = "url_for('content')"
 
     basedir = os.path.abspath(os.path.dirname(__file__))
