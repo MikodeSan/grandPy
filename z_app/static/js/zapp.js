@@ -10,13 +10,24 @@ const addQuery = (_strUserQuery) => {
     div.classList.add("query_style");
 }
 
-const addReply = (_strReply) => {
+const addReply = (_strReply, isfound) => {
 
     div = addTextDiv();
     time = localTime();
 
-    div.innerHTML = "<p>" + time + " - " + _strReply + "</p>";
-    div.classList.add("reply_style");
+    let reply = "<p>" + time + " - " + _strReply;
+	console.log(reply);
+	
+	if(isfound === true) {
+		reply += "<br/> <img src=" + static_map_url + " alt='Static Google Map' title='Google Map'/>";
+		console.log(reply);
+	} 
+	reply +=  "</p>";
+	console.log(reply);
+	
+	div.innerHTML = reply;
+	
+    div.classList.add("reply_style");		
 }
 
 const addTextDiv = () => {
@@ -37,13 +48,21 @@ getAddress = (address_json) => {
 
     console.log(address_json);
     addr = JSON.parse(address_json);
+	isfound = true;
 
-    data = addr.results[0]
-    zaddr = data.formatted_address
+    if (Object.entries(addr).length !== 0) {
 
-    reply = "formatted address " + zaddr + " @ " + "{lat.: " + data.geometry.location.lat + "; long.: " + data.geometry.location.lng
+        data = addr.results[0];
+        zaddr = data.formatted_address;
 
-    addReply(reply);
+        reply = "formatted address: " + zaddr + " @ " + "{lat.: " + data.geometry.location.lat + "; long.: " + data.geometry.location.lng + "}";
+
+    } else {
+        reply = "Address not found";
+		isfound = false;
+    }
+
+    addReply(reply, isfound);
 }
 
 const userInput_form = document.getElementById('user_input_form');
@@ -71,9 +90,8 @@ userInput_form.addEventListener('submit', function(event) {
     // avatarElt.style.width = "150px";
 
     let data = new FormData(userInput_form);
-    console.log(server_url)
 
-    zajaxPost(server_url, data, getAddress, false);
+    zajaxPost(parse_url, data, getAddress, false);
 
     userText_form.value = "";
 });

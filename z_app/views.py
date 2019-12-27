@@ -1,4 +1,6 @@
+from . import utils
 from flask import Flask, render_template, url_for, request, jsonify
+
 import requests
 
 app = Flask(__name__)
@@ -38,33 +40,15 @@ def zapp():
                             user_name=user_name)
 
 
-@app.route('/content/', methods=['GET', 'POST'])
-def content():
+@app.route('/parse/', methods=['GET', 'POST'])
+def parse():
 
     data = request.form
-    print(data['query_text'])
+    query = data['query_text']
+    # parse query
 
-    address_url = 'https://maps.googleapis.com/maps/api/geocode/json?address=place+de+la+coméde&key=AIzaSyAvVZSBIzuKvUREct8yRbmIAUJI2Ii_b3k'
-
-    response = requests.get(address_url)
-    if response.status_code == 200:
-        address_dict = response.json()
-        if address_dict['results'] and address_dict['status'] == "OK":
-            data = address_dict['results'][0]
-            # print(data['formatted_address'] + " " + data['geometry']['location']['lat'] + data['geometry']['location']['lng'])
-            print(data['formatted_address'])
-        else:
-            print('address not found')
-    else:
-        print('google reply error')
-
-    return address_dict
-
-    # return jsonify(data)
-    # return render_template('index.html')
-
-    # return jsonify(data)
-
+    # set url
+    return utils.gmaps_geocoding_request(query, app.config['GMAPS_KEY'])
 
 @app.route('/contents/<content_id>/')
 def contents(content_id):
