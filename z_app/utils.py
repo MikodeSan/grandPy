@@ -9,7 +9,7 @@ import requests
 __GMAPS_GEOCODING_URL__ = 'https://maps.googleapis.com/maps/api/geocode/json?'
 __GMAPS_STATIC_MAP_URL__ = 'https://maps.googleapis.com/maps/api/staticmap?'
 
-__TMP_PATH__ = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'tmp')
+__TMP_PATH__ = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'static', 'tmp')
 
 class ZGrandPy:
 
@@ -83,7 +83,7 @@ def gmaps_static_map_request_url(location, key):
     pin = "color:blue|label:P|{},{}".format(lat,lng)
     print(pin)
     markers.append(pin)
-    params = {'center': loc, 'zoom': 13, 'size': size, 'maptype': 'roadmap', 'markers': markers, 'key': key}
+    params = {'center': loc, 'zoom': 15, 'size': size, 'maptype': 'roadmap', 'markers': markers, 'key': key}
     url = __GMAPS_STATIC_MAP_URL__ + urllib.parse.urlencode(params, doseq=True)
     # print(url)
     return url

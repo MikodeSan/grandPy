@@ -10,13 +10,24 @@ const addQuery = (_strUserQuery) => {
     div.classList.add("query_style");
 }
 
-const addReply = (_strReply) => {
+const addReply = (_strReply, isfound) => {
 
     div = addTextDiv();
     time = localTime();
 
-    div.innerHTML = "<p>" + time + " - " + _strReply + "</p>";
-    div.classList.add("reply_style");
+    let reply = "<p>" + time + " - " + _strReply;
+	console.log(reply);
+	
+	if(isfound === true) {
+		reply += "<br/> <img src=" + static_map_url + " alt='Static Google Map' title='Google Map'/>";
+		console.log(reply);
+	} 
+	reply +=  "</p>";
+	console.log(reply);
+	
+	div.innerHTML = reply;
+	
+    div.classList.add("reply_style");		
 }
 
 const addTextDiv = () => {
@@ -37,18 +48,21 @@ getAddress = (address_json) => {
 
     console.log(address_json);
     addr = JSON.parse(address_json);
+	isfound = true;
 
     if (Object.entries(addr).length !== 0) {
 
-        data = addr.results[0]
-        zaddr = data.formatted_address
+        data = addr.results[0];
+        zaddr = data.formatted_address;
 
-        reply = "formatted address: " + zaddr + " @ " + "{lat.: " + data.geometry.location.lat + "; long.: " + data.geometry.location.lng
+        reply = "formatted address: " + zaddr + " @ " + "{lat.: " + data.geometry.location.lat + "; long.: " + data.geometry.location.lng + "}";
 
     } else {
-        reply = "Address not found"
+        reply = "Address not found";
+		isfound = false;
     }
-    addReply(reply);
+
+    addReply(reply, isfound);
 }
 
 const userInput_form = document.getElementById('user_input_form');
