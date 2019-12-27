@@ -4,7 +4,7 @@
     <p>The App Section</p>
 
     <h1>Ma section de page</h1>
-    <p>Bla bla bla bla</p>
+    <p>Bla bla bla bla {{ config['SERVER_URL'] }}</p>
 
 
     <div id="dialog" class="app_div">
@@ -22,6 +22,12 @@
 </section>
 
 <script type="text/javascript" src="{{url_for('static', filename='js/zajax.js')}}"></script>
+<script type="text/javascript">
+    var server_url = '{{ url_for(config['ZPARSER_URI'])}}';
+    console.log(server_url);
+    console.log('{{ config['ZPARSER_URI'] }}');
+</script>
 <script type="text/javascript" src="{{url_for('static', filename='js/zapp.js')}}"></script>
+
 
 {% endblock %}

@@ -46,7 +46,6 @@ getAddress = (address_json) => {
     addReply(reply);
 }
 
-
 const userInput_form = document.getElementById('user_input_form');
 userInput_form.addEventListener('submit', function(event) {
 
@@ -72,8 +71,9 @@ userInput_form.addEventListener('submit', function(event) {
     // avatarElt.style.width = "150px";
 
     let data = new FormData(userInput_form);
+    console.log(server_url)
 
-    zajaxPost("http://127.0.0.1:5000/content/", data, getAddress, false);
+    zajaxPost(server_url, data, getAddress, false);
 
     userText_form.value = "";
 });

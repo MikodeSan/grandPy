@@ -1,4 +1,5 @@
 import os
+from flask import url_for
 from sqlalchemy import create_engine
 
 
@@ -13,10 +14,20 @@ from sqlalchemy import create_engine
 SECRET_KEY = "#d#JCqTTW\nilK\\7m\x0bp#\tj~#H"
 
 FB_APP_ID = 2783332485018666
+ZPARSER_URI = 'content'
 
 # Database initialization
-basedir = os.path.abspath(os.path.dirname(__file__))
-SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(basedir, 'app.db')
+if os.environ.get('DATABASE_URL'):
+    print('Hello Prod.')
+    # ZSERVER_URL = "http://z-grand-py.herokuapp.com"
+
+    SQLALCHEMY_DATABASE_URI = os.environ['DATABASE_URL']
+else:
+    print('Hello Dev.')
+    # ZSERVER_URL = "url_for('content')"
+
+    basedir = os.path.abspath(os.path.dirname(__file__))
+    SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(basedir, 'app.db')
 
 
 # default
