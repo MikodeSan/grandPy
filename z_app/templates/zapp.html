@@ -23,9 +23,7 @@
 
 <script type="text/javascript" src="{{url_for('static', filename='js/zajax.js')}}"></script>
 <script type="text/javascript">
-    var server_url = '{{ url_for(config['ZPARSER_URI'])}}';
-    console.log(server_url);
-    console.log('{{ config['ZPARSER_URI'] }}');
+    var parse_url = '{{ url_for(config['ZPARSER_URI']) }}';
 </script>
 <script type="text/javascript" src="{{url_for('static', filename='js/zapp.js')}}"></script>
 

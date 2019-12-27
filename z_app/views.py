@@ -1,4 +1,6 @@
+from . import utils
 from flask import Flask, render_template, url_for, request, jsonify
+
 import requests
 
 app = Flask(__name__)
@@ -38,14 +40,22 @@ def zapp():
                             user_name=user_name)
 
 
-@app.route('/content/', methods=['GET', 'POST'])
-def content():
+@app.route('/parse/', methods=['GET', 'POST'])
+def parse():
 
     data = request.form
-    print(data['query_text'])
+    query = data['query_text']
+    print(query)
 
-    address_url = 'https://maps.googleapis.com/maps/api/geocode/json?address=place+de+la+coméde&key=AIzaSyAvVZSBIzuKvUREct8yRbmIAUJI2Ii_b3k'
+    # parse query
+    # set url
 
+    address_url = utils.gmaps_geocoding(query, app.config['GMAPS_KEY'])
+    # address_url = 'https://maps.googleapis.com/maps/api/geocode/json?address=place+de+la+coméde&key=AIzaSyAvVZSBIzuKvUREct8yRbmIAUJI2Ii_b3k'
+    # address_url_0 = url_for('https://maps.googleapis.com/maps/api/geocode/json', address='place de la comédie', key='AIzaSyAvVZSBIzuKvUREct8yRbmIAUJI2Ii_b3k', _external=True)
+    # print(address_url_0)
+
+    address_dict = {}
     response = requests.get(address_url)
     if response.status_code == 200:
         address_dict = response.json()
@@ -54,6 +64,7 @@ def content():
             # print(data['formatted_address'] + " " + data['geometry']['location']['lat'] + data['geometry']['location']['lng'])
             print(data['formatted_address'])
         else:
+            address_dict = {}
             print('address not found')
     else:
         print('google reply error')

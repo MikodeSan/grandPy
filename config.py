@@ -12,9 +12,9 @@ from sqlalchemy import create_engine
 # >>> import random, string
 # >>> "".join([random.choice(string.printable) for _ in range(24)])
 SECRET_KEY = "#d#JCqTTW\nilK\\7m\x0bp#\tj~#H"
-
+GMAPS_KEY = "AIzaSyAvVZSBIzuKvUREct8yRbmIAUJI2Ii_b3k"
 FB_APP_ID = 2783332485018666
-ZPARSER_URI = 'content'
+ZPARSER_URI = 'parse'
 
 # Database initialization
 if os.environ.get('DATABASE_URL'):

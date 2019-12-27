@@ -38,11 +38,16 @@ getAddress = (address_json) => {
     console.log(address_json);
     addr = JSON.parse(address_json);
 
-    data = addr.results[0]
-    zaddr = data.formatted_address
+    if (Object.entries(addr).length !== 0) {
 
-    reply = "formatted address " + zaddr + " @ " + "{lat.: " + data.geometry.location.lat + "; long.: " + data.geometry.location.lng
+        data = addr.results[0]
+        zaddr = data.formatted_address
 
+        reply = "formatted address: " + zaddr + " @ " + "{lat.: " + data.geometry.location.lat + "; long.: " + data.geometry.location.lng
+
+    } else {
+        reply = "Address not found"
+    }
     addReply(reply);
 }
 
@@ -71,9 +76,8 @@ userInput_form.addEventListener('submit', function(event) {
     // avatarElt.style.width = "150px";
 
     let data = new FormData(userInput_form);
-    console.log(server_url)
 
-    zajaxPost(server_url, data, getAddress, false);
+    zajaxPost(parse_url, data, getAddress, false);
 
     userText_form.value = "";
 });
