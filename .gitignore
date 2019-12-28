@@ -159,7 +159,7 @@ _ReSharper*/
 packages/
 
 #misc.
-tmp/
+z_app/static/tmp/*.png
 /dat/im/
 fbapp/static/*.jpg
 app.db
