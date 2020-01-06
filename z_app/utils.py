@@ -90,6 +90,7 @@ def gmaps_static_map_request_url(location, key):
 
 def parse():
     
+    print("dummy for test")
     pass
 
 if __name__ == "__main__":
