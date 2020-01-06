@@ -1,3 +1,13 @@
+#!/usr/bin/python3
+"""
+    geosearch.py
+
+    MediaWiki API Demos
+    Demo of `Geosearch` module: Search for wiki pages nearby
+
+    MIT License
+"""
+
 import os
 import logging as lg
 import shutil
@@ -6,6 +16,27 @@ import urllib.parse
 import requests
 
 
+S = requests.Session()
+
+URL = "https://en.wikipedia.org/w/api.php"
+
+PARAMS = {
+    "format": "json",
+    "list": "geosearch",
+    "gscoord": "43.7101728|7.261953200000001",
+    "gslimit": "10",
+    "gsradius": "10000",
+    "action": "query"
+}
+
+R = S.get(url=URL, params=PARAMS)
+DATA = R.json()
+
+PLACES = DATA['query']['geosearch']
+
+for place in PLACES:
+    print(place['title'])
+    
 # __GMAPS_GEOCODING_URL__ = 'https://maps.googleapis.com/maps/api/geocode/json?'
 # __GMAPS_STATIC_MAP_URL__ = 'https://maps.googleapis.com/maps/api/staticmap?'
 
