@@ -30,7 +30,7 @@ PARAMS = {
     "list": "geosearch",
     "gscoord": "43.7101728|7.261953200000001",
     "gslimit": "10",
-    "gsradius": "10000",
+    "gsradius": "1250", # in kilometer
     "action": "query"
 }
 
