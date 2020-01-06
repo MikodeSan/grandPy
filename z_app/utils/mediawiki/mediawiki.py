@@ -16,9 +16,14 @@ import urllib.parse
 import requests
 
 
+# __GMAPS_GEOCODING_URL__ = 'https://maps.googleapis.com/maps/api/geocode/json?'
+# __GMAPS_STATIC_MAP_URL__ = 'https://maps.googleapis.com/maps/api/staticmap?'
+
+# __TMP_PATH__ = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'static', 'tmp')
+URL = "https://en.wikipedia.org/w/api.php"
+
 S = requests.Session()
 
-URL = "https://en.wikipedia.org/w/api.php"
 
 PARAMS = {
     "format": "json",
@@ -37,16 +42,12 @@ PLACES = DATA['query']['geosearch']
 for place in PLACES:
     print(place['title'])
     
-# __GMAPS_GEOCODING_URL__ = 'https://maps.googleapis.com/maps/api/geocode/json?'
-# __GMAPS_STATIC_MAP_URL__ = 'https://maps.googleapis.com/maps/api/staticmap?'
 
-# __TMP_PATH__ = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'static', 'tmp')
+class ZMediaWiki:
 
-# class ZGrandPy:
-
-#     def __init__(self):
+    def __init__(self):
         
-#         pass
+        pass
 
 # def gmaps_geocoding_request(query, key):
 
