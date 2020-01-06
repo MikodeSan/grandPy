@@ -49,6 +49,8 @@ class ZMediaWiki:
         
         pass
 
+# dummy comment for test, not to backport
+
 # def gmaps_geocoding_request(query, key):
 
 #     request_url = gmaps_geocoding_request_url(query, key)
