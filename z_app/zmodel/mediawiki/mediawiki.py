@@ -58,6 +58,9 @@ def wikipedia_request_page_from_geocoding(flatitude, flongitude):
             for idx, place in enumerate(places_list):
                 print(idx, "W#{}".format(place['pageid']), place['title'], place['dist'], "m")
 
+            # wikipedia_extract_page(places_list[0]['pageid'])
+            wikipedia_extract_page(5653202)
+
         else:
             print('address not found')
             lg.warning('address not found')
@@ -70,6 +73,74 @@ def wikipedia_request_page_from_geocoding(flatitude, flongitude):
     return places_list
 
 
+def wikipedia_extract_page(pageid):
+
+    description = ""
+
+    parameters = {
+        "action": "query",
+        "pageids": pageid,
+        "prop": "extracts",
+        #"exintro": "true",
+        # "exsentences": 3,
+        "explaintext": "true",
+        "exsectionformat": "wiki",     # "wiki"
+        "format": "json",
+    }
+
+    # API Request
+    response = requests.get(url=__WIKIPEDiA_URL__, params=parameters)
+
+    if response.status_code == 200:
+
+        reply_dict = response.json()
+
+        description = reply_dict['query']['pages'][str(pageid)]['extract']
+        print("description:", description)
+
+        section2Check = ['Références', 'Bibliographie', 'Annexes']
+        enable = True
+
+        if description:
+
+            idx = 0
+            desc_lst = []
+            str_tmp = description.split("\n\n==", 1)
+            while str_tmp and enable:
+
+                print(idx, "str_tmp:", str_tmp)
+                desc_lst.append(str_tmp.pop(0))
+                print(idx, "desc:", desc_lst)
+                print(idx, "str_tmp:", str_tmp)
+
+                if str_tmp:
+                    str_tmp = str_tmp[0].split("==\n", 1)
+                    section_title = str_tmp.pop(0)
+
+                    if any(section in section_title for section in section2Check):
+                        print("section found")
+                        enable = False
+                    else:
+                        str_tmp = str_tmp[0].split("\n\n==", 1)
+
+                idx += 1
+
+            for idx, desc in enumerate(desc_lst): 
+                print(idx, desc)
+
+        else:
+            print('page not found')
+            lg.warning('address not found')
+    else:
+        print('mediawiki reply error')
+        lg.warning('mediawiki reply error')
+
+    del response
+
+    return description
+
+
+
 class ZMediaWiki:
 
     def __init__(self):
@@ -80,44 +151,6 @@ class ZMediaWiki:
 
         pass
 
-
-# def gmaps_static_map_request(location, key):
-
-#     map_url = gmaps_static_map_request_url(location, key)
-#     print(map_url)
-
-#     # Store static map image into temporary directory
-#     response = requests.get(map_url, stream=True)
-#     if response.status_code == 200:
-#         image_path = __TMP_PATH__ + "/{}".format("map.png")
-#         # print(image_path)
-#         with open(image_path, 'wb') as out_file:
-#             response.raw.decode_content = True
-#             shutil.copyfileobj(response.raw, out_file)
-#     else:
-#         print('google static map error')
-
-#     del response
-
-# def gmaps_static_map_request_url(location, key):
-
-#     lat = location['lat']
-#     lng = location['lng']
-#     loc = "{},{}".format(lat, lng)
-#     print(loc)
-#     size = "{}x{}".format(240, 240)     # IPhone [480 × 320] ; standard_min [320 x 200|240]
-#     print(size)
-#     markers = []
-#     pin = "color:blue|label:P|{},{}".format(lat,lng)
-#     print(pin)
-#     markers.append(pin)
-#     params = {'center': loc, 'zoom': 15, 'size': size, 'maptype': 'roadmap', 'markers': markers, 'key': key}
-#     url = __GMAPS_STATIC_MAP_URL__ + urllib.parse.urlencode(params, doseq=True)
-#     # print(url)
-#     return url
-
-# def parse():
-#     pass
 
 if __name__ == "__main__":
 
@@ -142,11 +175,6 @@ if __name__ == "__main__":
     lg.info('info')
     lg.debug('debug')
 
-    loc = {
-        "lat": 46.084044,
-        "lng": 6.728173
-    }
-
-    wikpedia_request_page_from_geocoding(loc)
+    wikipedia_request_page_from_geocoding(48.8749731, 2.3498414)
 
     # gmaps_geocoding('cité la meynard', 'azerfghjkl51654mlkghfch')

@@ -41,10 +41,10 @@ def zparse(query, key):
         place_lst = mediawiki.wikipedia_request_page_from_geocoding(latitude, longitude)
 
         # place description
-        if place_lst:
+        # if place_lst:
 
-            for idx, place in enumerate(place_lst):
-                print(idx, place['title'], place['dist'], "m")
+        #     for idx, place in enumerate(place_lst):
+        #         print(idx, place['title'], place['dist'], "m")
 
     return reply_dct
 
