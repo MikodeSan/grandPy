@@ -24,12 +24,12 @@ __GS_LIMIT_MIN__ = 1
 __GS_LIMIT_DEFAULT__ = 12
 __GS_LIMIT_MAX__ = 500
 
-def wikpedia_request_page_from_geocoding(location):
 
-    # Define parameters
-    lat = location['lat']
-    lng = location['lng']
-    loc = "{}|{}".format(lat, lng)
+def wikipedia_request_page_from_geocoding(flatitude, flongitude):
+
+    places_list = []
+
+    loc = "{}|{}".format(flatitude, flongitude)
     print(loc)
 
     radius = "{}".format(__RADIUS_MAX__)          # radius unit in meter
@@ -50,17 +50,14 @@ def wikpedia_request_page_from_geocoding(location):
     if response.status_code == 200:
 
         reply_dict = response.json()
-        
+
         places_list = reply_dict['query']['geosearch']
 
         if places_list:
 
             for idx, place in enumerate(places_list):
-                print(idx, place['title'], place['dist'], "m")
+                print(idx, "W#{}".format(place['pageid']), place['title'], place['dist'], "m")
 
-#             gmaps_static_map_request(location_dict, key)
-
-#             geocoding_dict = reply_dict
         else:
             print('address not found')
             lg.warning('address not found')
@@ -70,13 +67,12 @@ def wikpedia_request_page_from_geocoding(location):
 
     del response
 
-#     return geocoding_dict
+    return places_list
 
 
 class ZMediaWiki:
 
     def __init__(self):
-        
         pass
 
     def get(self):
@@ -90,7 +86,7 @@ class ZMediaWiki:
 #     map_url = gmaps_static_map_request_url(location, key)
 #     print(map_url)
 
-#     # Store static map image into temporary directory  
+#     # Store static map image into temporary directory
 #     response = requests.get(map_url, stream=True)
 #     if response.status_code == 200:
 #         image_path = __TMP_PATH__ + "/{}".format("map.png")
@@ -121,11 +117,10 @@ class ZMediaWiki:
 #     return url
 
 # def parse():
-    
 #     pass
 
 if __name__ == "__main__":
-    
+
     import logging as lg
 
     # logger = logging.getLogger()
