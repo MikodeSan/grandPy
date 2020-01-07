@@ -16,32 +16,62 @@ import urllib.parse
 import requests
 
 
-# __GMAPS_GEOCODING_URL__ = 'https://maps.googleapis.com/maps/api/geocode/json?'
-# __GMAPS_STATIC_MAP_URL__ = 'https://maps.googleapis.com/maps/api/staticmap?'
+__WIKIPEDiA_URL__ = "https://fr.wikipedia.org/w/api.php"
+__RADIUS_MIN__ = 10
+__RADIUS_DEFAULT__ = 1250
+__RADIUS_MAX__ = 10000
+__GS_LIMIT_MIN__ = 1
+__GS_LIMIT_DEFAULT__ = 12
+__GS_LIMIT_MAX__ = 500
 
-# __TMP_PATH__ = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'static', 'tmp')
-URL = "https://en.wikipedia.org/w/api.php"
+def wikpedia_request_page_from_geocoding(location):
 
-S = requests.Session()
+    # Define parameters
+    lat = location['lat']
+    lng = location['lng']
+    loc = "{}|{}".format(lat, lng)
+    print(loc)
 
+    radius = "{}".format(__RADIUS_MAX__)          # radius unit in meter
+    print(radius)
 
-PARAMS = {
-    "format": "json",
-    "list": "geosearch",
-    "gscoord": "43.7101728|7.261953200000001",
-    "gslimit": "10",
-    "gsradius": "1250", # in kilometer
-    "action": "query"
-}
+    parameters = {
+        "action": "query",
+        "list": "geosearch",
+        "gscoord": loc,
+        "gsradius": __RADIUS_MAX__,
+        "gslimit": __GS_LIMIT_MAX__,
+        "format": "json",
+    }
 
-R = S.get(url=URL, params=PARAMS)
-DATA = R.json()
+    # API Request
+    response = requests.get(url=__WIKIPEDiA_URL__, params=parameters)
 
-PLACES = DATA['query']['geosearch']
+    if response.status_code == 200:
 
-for place in PLACES:
-    print(place['title'])
-    
+        reply_dict = response.json()
+        
+        places_list = reply_dict['query']['geosearch']
+
+        if places_list:
+
+            for idx, place in enumerate(places_list):
+                print(idx, place['title'], place['dist'], "m")
+
+#             gmaps_static_map_request(location_dict, key)
+
+#             geocoding_dict = reply_dict
+        else:
+            print('address not found')
+            lg.warning('address not found')
+    else:
+        print('mediawiki reply error')
+        lg.warning('mediawiki reply error')
+
+    del response
+
+#     return geocoding_dict
+
 
 class ZMediaWiki:
 
@@ -49,43 +79,11 @@ class ZMediaWiki:
         
         pass
 
-# dummy comment for test, not to backport
+    def get(self):
+        """Search for pages by specifying the geographic coordinates"""
 
-# def gmaps_geocoding_request(query, key):
+        pass
 
-#     request_url = gmaps_geocoding_request_url(query, key)
-
-#     geocoding_dict = {}
-
-#     response = requests.get(request_url)
-#     if response.status_code == 200:
-
-#         reply_dict = response.json()
-#         if reply_dict['results'] and reply_dict['status'] == "OK":
-
-#             location_dict = reply_dict['results'][0]['geometry']['location']
-#             # print(location_dict)
-
-#             gmaps_static_map_request(location_dict, key)
-
-#             geocoding_dict = reply_dict
-#         else:
-#             print('address not found')
-#     else:
-#         print('google reply error')
-
-#     del response
-
-#     return geocoding_dict
-
-
-# def gmaps_geocoding_request_url(query, key):
-
-#     params = {'address': query, 'key': key}
-#     url = __GMAPS_GEOCODING_URL__ + urllib.parse.urlencode(params)
-#     # print(url)
-#     return url
-    
 
 # def gmaps_static_map_request(location, key):
 
@@ -128,5 +126,32 @@ class ZMediaWiki:
 
 if __name__ == "__main__":
     
+    import logging as lg
+
+    # logger = logging.getLogger()
+    # formatter = logging.Formatter('P%(process)s-T%(asctime)s-%(name)s-%(levelname)s-%(message)s')
+    # logger.setFormatter(formatter)
+    # logger.setLevel(logging.DEBUG)
+    lg.basicConfig(format='P%(process)s-T%(asctime)s.%(msecs)03d-%(name)s-%(levelname)s: %(message)s', datefmt='%H:%M:%S', level=lg.DEBUG)
+
+
+    # logger.critical('critical')
+    # logger.error('error')
+    # logger.warning('warning')
+    # logger.info('info')
+    # logger.debug('debug')
+
+    lg.critical('critical')
+    lg.error('error')
+    lg.warning('warning')
+    lg.info('info')
+    lg.debug('debug')
+
+    loc = {
+        "lat": 46.084044,
+        "lng": 6.728173
+    }
+
+    wikpedia_request_page_from_geocoding(loc)
+
     # gmaps_geocoding('cité la meynard', 'azerfghjkl51654mlkghfch')
-    pass
