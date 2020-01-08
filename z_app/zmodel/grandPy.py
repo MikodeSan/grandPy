@@ -1,6 +1,7 @@
 import os
 import logging as lg
 import shutil
+import random
 
 import urllib.parse
 import requests
@@ -41,10 +42,17 @@ def zparse(query, key):
         place_lst = mediawiki.wikipedia_request_page_from_geocoding(latitude, longitude)
 
         # place description
-        # if place_lst:
+        if place_lst:
 
-        #     for idx, place in enumerate(place_lst):
+            idx_max = 6
+            idx_max = min(idx_max, len(place_lst)-1)
+
+            place = random.choice(place_lst[:idx_max])
         #         print(idx, place['title'], place['dist'], "m")
+
+            description = mediawiki.wikipedia_extract_page(place['pageid'])
+
+            print("description app:", description)
 
     return reply_dct
 

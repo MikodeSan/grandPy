@@ -18,10 +18,10 @@ import requests
 
 __WIKIPEDiA_URL__ = "https://fr.wikipedia.org/w/api.php"
 __RADIUS_MIN__ = 10
-__RADIUS_DEFAULT__ = 1250
+__RADIUS_DEFAULT__ = 1700
 __RADIUS_MAX__ = 10000
 __GS_LIMIT_MIN__ = 1
-__GS_LIMIT_DEFAULT__ = 12
+__GS_LIMIT_DEFAULT__ = 7
 __GS_LIMIT_MAX__ = 500
 
 
@@ -32,15 +32,12 @@ def wikipedia_request_page_from_geocoding(flatitude, flongitude):
     loc = "{}|{}".format(flatitude, flongitude)
     print(loc)
 
-    radius = "{}".format(__RADIUS_MAX__)          # radius unit in meter
-    print(radius)
-
     parameters = {
         "action": "query",
         "list": "geosearch",
         "gscoord": loc,
-        "gsradius": __RADIUS_MAX__,
-        "gslimit": __GS_LIMIT_MAX__,
+        "gsradius": __RADIUS_DEFAULT__,
+        "gslimit": __GS_LIMIT_DEFAULT__,
         "format": "json",
     }
 
@@ -58,9 +55,6 @@ def wikipedia_request_page_from_geocoding(flatitude, flongitude):
             for idx, place in enumerate(places_list):
                 print(idx, "W#{}".format(place['pageid']), place['title'], place['dist'], "m")
 
-            # wikipedia_extract_page(places_list[0]['pageid'])
-            wikipedia_extract_page(5653202)
-
         else:
             print('address not found')
             lg.warning('address not found')
@@ -75,6 +69,7 @@ def wikipedia_request_page_from_geocoding(flatitude, flongitude):
 
 def wikipedia_extract_page(pageid):
 
+    # cite paradis, paris; pageid 5653202 for test
     description = ""
 
     parameters = {
@@ -96,7 +91,7 @@ def wikipedia_extract_page(pageid):
         reply_dict = response.json()
 
         description = reply_dict['query']['pages'][str(pageid)]['extract']
-        print("description:", description)
+        # print("description:", description)
 
         section2Check = ['Références', 'Bibliographie', 'Annexes']
         enable = True
@@ -125,8 +120,10 @@ def wikipedia_extract_page(pageid):
 
                 idx += 1
 
-            for idx, desc in enumerate(desc_lst): 
+            for idx, desc in enumerate(desc_lst):
                 print(idx, desc)
+
+            description = ''.join(desc_lst)
 
         else:
             print('page not found')
@@ -138,7 +135,6 @@ def wikipedia_extract_page(pageid):
     del response
 
     return description
-
 
 
 class ZMediaWiki:
