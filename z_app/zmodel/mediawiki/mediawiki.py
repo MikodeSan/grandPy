@@ -77,9 +77,9 @@ def wikipedia_extract_page(pageid):
         "pageids": pageid,
         "prop": "extracts",
         #"exintro": "true",
-        # "exsentences": 3,
+        "exsentences": 7,
         "explaintext": "true",
-        "exsectionformat": "wiki",     # "wiki"
+        "exsectionformat": "wiki",
         "format": "json",
     }
 
@@ -93,7 +93,7 @@ def wikipedia_extract_page(pageid):
         description = reply_dict['query']['pages'][str(pageid)]['extract']
         # print("description:", description)
 
-        section2Check = ['Références', 'Bibliographie', 'Annexes']
+        stop_section_lst = ['références', 'bibliographie', 'annexes', 'notes', 'voir aussi']
         enable = True
 
         if description:
@@ -103,17 +103,19 @@ def wikipedia_extract_page(pageid):
             str_tmp = description.split("\n\n==", 1)
             while str_tmp and enable:
 
-                print(idx, "str_tmp:", str_tmp)
+                # print(idx, "str_tmp:", str_tmp)
                 desc_lst.append(str_tmp.pop(0))
-                print(idx, "desc:", desc_lst)
-                print(idx, "str_tmp:", str_tmp)
+                # print(idx, "desc:", desc_lst)
+                # print(idx, "str_tmp:", str_tmp)
 
                 if str_tmp:
                     str_tmp = str_tmp[0].split("==\n", 1)
                     section_title = str_tmp.pop(0)
+                    section_title = section_title.lower()
 
-                    if any(section in section_title for section in section2Check):
-                        print("section found")
+
+                    if any(section in section_title for section in stop_section_lst):
+                        print("Stop section found")
                         enable = False
                     else:
                         str_tmp = str_tmp[0].split("\n\n==", 1)
@@ -126,8 +128,8 @@ def wikipedia_extract_page(pageid):
             description = ''.join(desc_lst)
 
         else:
-            print('page not found')
-            lg.warning('address not found')
+            print('wikimedia page not found')
+            lg.warning('wikimedia page not found')
     else:
         print('mediawiki reply error')
         lg.warning('mediawiki reply error')

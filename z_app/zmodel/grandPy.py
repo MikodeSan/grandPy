@@ -24,7 +24,12 @@ class ZGrandPy:
 def zparse(query, key):
 
     reply_dct = {}
+    reply_dct['address'] = ""
+    reply_dct['location'] = {}
+    reply_dct['description'] = ""
+
     place_lst = []
+
 
     # get place geocoding
     geocoding_dct = gmaps_geocoding_request(query, key)
@@ -32,11 +37,16 @@ def zparse(query, key):
     # get place description
     if geocoding_dct:
 
-        reply_dct = geocoding_dct
+        result = geocoding_dct['results'][0]
 
-        location = geocoding_dct['results'][0]['geometry']['location']
+        address = result['formatted_address']
+
+        reply_dct['address'] = address
+
+        location = result['geometry']['location']
         latitude = location['lat']
         longitude = location['lng']
+        reply_dct['location'] = {'lat': latitude, 'lng': longitude}
 
         # place page reference
         place_lst = mediawiki.wikipedia_request_page_from_geocoding(latitude, longitude)
@@ -48,9 +58,9 @@ def zparse(query, key):
             idx_max = min(idx_max, len(place_lst)-1)
 
             place = random.choice(place_lst[:idx_max])
-        #         print(idx, place['title'], place['dist'], "m")
 
             description = mediawiki.wikipedia_extract_page(place['pageid'])
+            reply_dct['description'] = description
 
             print("description app:", description)
 
