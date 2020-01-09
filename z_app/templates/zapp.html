@@ -16,14 +16,16 @@
         <form id="user_input_form">
             <p><label for="query_text">Votre pseudo</label> :
                 <input type="text" name="query_text" id="query_text" placeholder="Your query ..." size="120" maxlength="512" />
-                <input type="image" id="submitImage" src="{{url_for('static', filename='img/paper-plane-icon.png')}}" alt="Submit" title="Submit query" height="24" width="24"></p>
+                <!-- <span class="add-on"><i class="fas fa-paper-plane"></i></span> -->
+                <!-- <input type="image" id="submitImage" src="{{url_for('static', filename='img/paper-plane-icon.png')}}" alt="Submit" title="Submit query" height="24" width="24"></p> -->
+                <input type="image" id="submitImage" class="fas fa-robot" alt="Submit" title="Submit query" height="24" width="24"></p>
         </form>
     </div>
 </section>
 
 <script type="text/javascript" src="{{url_for('static', filename='js/zajax.js')}}"></script>
 <script type="text/javascript">
-    var parse_url = '{{ url_for(config['ZPARSER_URI']) }}';
+    var parse_url = "{{ url_for(config['ZPARSER_URI']) }}";
     var static_map_url = "{{url_for('static', filename='tmp/map.png')}}";
 </script>
 <script type="text/javascript" src="{{url_for('static', filename='js/zapp.js')}}"></script>
