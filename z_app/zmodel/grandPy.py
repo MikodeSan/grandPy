@@ -50,12 +50,16 @@ def zparse(query, key):
 
         # place page reference
         place_lst = mediawiki.wikipedia_request_page_from_geocoding(latitude, longitude)
+        print("place_lst", place_lst)
 
         # place description
         if place_lst:
 
-            idx_max = 6
-            idx_max = min(idx_max, len(place_lst)-1)
+            nplace = len(place_lst)
+            nplace_max = 7
+
+            idx_max = min(nplace, nplace_max)
+            print(idx_max)
 
             place = random.choice(place_lst[:idx_max])
 
