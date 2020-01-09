@@ -10,12 +10,23 @@ const addQuery = (_strUserQuery) => {
     div.classList.add("query_style");
 }
 
-const addReply = (_strReply) => {
+const addReply = (_strReply, isfound) => {
 
     div = addTextDiv();
     time = localTime();
 
-    div.innerHTML = "<p>" + time + " - " + _strReply + "</p>";
+    let reply = "<p>" + time + " - " + _strReply;
+    console.log(reply);
+
+    if (isfound === true) {
+        reply += "<br/> <img src=" + static_map_url + " alt='Static Google Map' title='Google Map'/>";
+        console.log(reply);
+    }
+    reply += "</p>";
+    console.log(reply);
+
+    div.innerHTML = reply;
+
     div.classList.add("reply_style");
 }
 
@@ -33,19 +44,28 @@ const localTime = () => {
 }
 
 
-getAddress = (address_json) => {
+getAddress = (reply_json) => {
 
-    console.log(address_json);
-    addr = JSON.parse(address_json);
+    console.log(reply_json);
+    data = JSON.parse(reply_json);
+    isfound = true;
 
-    data = addr.results[0]
-    zaddr = data.formatted_address
+    if (data.address) {
 
-    reply = "formatted address " + zaddr + " @ " + "{lat.: " + data.geometry.location.lat + "; long.: " + data.geometry.location.lng
+        reply = "Address: " + data.address + " @ " + "{lat.: " + data.location.lat + "; long.: " + data.location.lng + "}";
 
-    addReply(reply);
+    } else {
+        reply = "Address not found";
+        isfound = false;
+    }
+
+    addReply(reply, isfound);
+
+    if (data.description) {
+
+        addReply(data.description, false);
+    }
 }
-
 
 const userInput_form = document.getElementById('user_input_form');
 userInput_form.addEventListener('submit', function(event) {
@@ -73,7 +93,7 @@ userInput_form.addEventListener('submit', function(event) {
 
     let data = new FormData(userInput_form);
 
-    zajaxPost("http://127.0.0.1:5000/content/", data, getAddress, false);
+    zajaxPost(parse_url, data, getAddress, false);
 
     userText_form.value = "";
 });
