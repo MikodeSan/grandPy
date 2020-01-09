@@ -1,7 +1,9 @@
-from . import utils
 from flask import Flask, render_template, url_for, request, jsonify
 
 import requests
+
+from .zmodel import grandPy
+
 
 app = Flask(__name__)
 
@@ -48,7 +50,7 @@ def parse():
     # parse query
 
     # set url
-    return utils.gmaps_geocoding_request(query, app.config['GMAPS_KEY'])
+    return grandPy.zparse(query, app.config['GMAPS_KEY'])
 
 @app.route('/contents/<content_id>/')
 def contents(content_id):

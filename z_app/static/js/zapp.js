@@ -16,18 +16,18 @@ const addReply = (_strReply, isfound) => {
     time = localTime();
 
     let reply = "<p>" + time + " - " + _strReply;
-	console.log(reply);
-	
-	if(isfound === true) {
-		reply += "<br/> <img src=" + static_map_url + " alt='Static Google Map' title='Google Map'/>";
-		console.log(reply);
-	} 
-	reply +=  "</p>";
-	console.log(reply);
-	
-	div.innerHTML = reply;
-	
-    div.classList.add("reply_style");		
+    console.log(reply);
+
+    if (isfound === true) {
+        reply += "<br/> <img src=" + static_map_url + " alt='Static Google Map' title='Google Map'/>";
+        console.log(reply);
+    }
+    reply += "</p>";
+    console.log(reply);
+
+    div.innerHTML = reply;
+
+    div.classList.add("reply_style");
 }
 
 const addTextDiv = () => {
@@ -44,25 +44,27 @@ const localTime = () => {
 }
 
 
-getAddress = (address_json) => {
+getAddress = (reply_json) => {
 
-    console.log(address_json);
-    addr = JSON.parse(address_json);
-	isfound = true;
+    console.log(reply_json);
+    data = JSON.parse(reply_json);
+    isfound = true;
 
-    if (Object.entries(addr).length !== 0) {
+    if (data.address) {
 
-        data = addr.results[0];
-        zaddr = data.formatted_address;
-
-        reply = "formatted address: " + zaddr + " @ " + "{lat.: " + data.geometry.location.lat + "; long.: " + data.geometry.location.lng + "}";
+        reply = "Address: " + data.address + " @ " + "{lat.: " + data.location.lat + "; long.: " + data.location.lng + "}";
 
     } else {
         reply = "Address not found";
-		isfound = false;
+        isfound = false;
     }
 
     addReply(reply, isfound);
+
+    if (data.description) {
+
+        addReply(data.description, false);
+    }
 }
 
 const userInput_form = document.getElementById('user_input_form');
