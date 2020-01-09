@@ -4,23 +4,60 @@ style.css
 */
 
 html {
-    font Arial,
-    Helvetica,
-    sans-serif;
-    color: white
+    font: Arial, Helvetica, Calibri, Candara, sans-serif;
+    color: Ivory
 }
 
 header,
 footer {
-    background-color: darkslategrey;
+    background-color: SlateGrey;
 }
 
 body {
-    background-color: black;
+    background-color: DarkSlateGrey;
+    /* LightGrey 	#D3D3D3
+    DarkGrey 	#A9A9A9
+    Grey 	#808080
+    LightSlateGrey 	#778899
+    SlateGrey 	#708090
+    DimGrey 	#696969
+    DarkSlateGrey 	#2F4F4F */
+    /* AliceBlue #F0F8FF 
+    Blue #0000FF 
+    DarkBlue #00008B 
+    DarkSlateBlue #483D8B 
+    DeepSkyBlue #00BFFF 
+    DodgerBlue #1E90FF 
+    LightBlue #ADD8E6 
+    LightSkyBlue #87CEFA 
+    MediumBlue #0000CD 
+    MediumSlateBlue #7B68EE 
+    MidnightBlue #191970 
+    PowderBlue #B0E0E6 
+    RoyalBlue #4169E1 
+    SkyBlue #87CEEB 
+    SlateBlue #6A5ACD */
+    /* AntiqueWhite 	#FAEBD7
+    FloralWhite 	#FFFAF0
+    GhostWhite 	#F8F8FF
+    NavajoWhite 	#FFDEAD
+    White 	#FFFFFF
+    WhiteSmoke 	#F5F5F5 
+    Snow 	#FFFAFA 
+    SeaShell 	#FFF5EE 
+    OldLace 	#FDF5E6 
+    MintCream 	#F5FFFA 
+    Ivory 	#FFFFF0 
+    HoneyDew 	#F0FFF0 
+    Cornsilk 	#FFF8DC
+    BlanchedAlmond 	#FFEBCD
+    Beige 	#F5F5DC
+    Bisque 	#FFE4C4
+    Aquamarine 	#7FFFD4 */
 }
 
 #app_section {
-    background-color: chocolate;
+    background-color: black;
 }
 
 .introduction* {
@@ -39,10 +76,10 @@ body {
     margin: auto;
     margin-bottom: 12px;
     word-wrap: break-word;
-    border: 1px solid black;
+    border: 1px none;
     border-radius: 7px;
     overflow: auto;
-    background-color: lightslategrey;
+    background-color: LightSlateGrey;
 }
 
 #dialog {
@@ -54,7 +91,6 @@ body {
 #user_input {
     /* height: 24px; */
     text-align: right;
-    border: 1px solid yellow;
     /* padding-top: 12px; */
 }
 
@@ -70,7 +106,7 @@ body {
 }
 
 .reply_style {
-    color: salmon;
+    color: ivory;
     text-align: left;
     border: 1px solid salmon;
 }
