@@ -56,7 +56,7 @@ def zparse(query, key):
         if place_lst:
 
             nplace = len(place_lst)
-            nplace_max = 7
+            nplace_max = 3
 
             idx_max = min(nplace, nplace_max)
             print(idx_max)

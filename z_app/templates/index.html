@@ -2,52 +2,31 @@
 
 <section id="section_01">
 
-    <p>The Section 1</p>
+    <p class="introduction">
+        <img src={{ url_for( 'static', filename='img/grand_father_lineal_color_2369096.png' ) }} alt="GrandPy Bot Pics" title="My name is Py, GrandPy ;) !" /> Bienvenu <em>chaton</em> ! Je suis <strong>content</strong> de te voir aujourd'hui :)
+    </p>
 
-    <h1>Ma section de page</h1>
-    <p>Bla bla bla bla</p>
-
-    <article>
-        <h1>Mon article</h1>
-        <p>Bla bla bla bla</p>
-    </article>
-
-    <aside>
-        <!-- Placez ici des informations complémentaires -->
-    </aside>
+    <p><br/> Veux-tu passer un moment sympa avec moi ?
+    </p>
 
 </section>
 
-<section id="section_02">
+<section id="inscription">
+    <h3 id="inscription">Inscription</h3>
 
-    <p>The Section 2</p>
+    <div class="log_in">
+        <h4>Facebook</h4>
+        <p>Sign in</p>
+    </div>
 
-    <h1>Ma section de page</h1>
-    <p>Bla bla bla bla</p>
+    <p>or</p>
+
+    <div class="log_in">
+        <h4>Présentation</h4>
+        <p> nom: <br/> genre: <br/> <a href="{{ url_for('zapp') }}">C'est par ici</a>
+        </p>
+    </div>
 
 </section>
-
-<div>
-
-    <p>The Div 1</p>
-
-
-    <h1 id="zheader_1">ZGrandPy Bot</h1>
-
-    <!-- Ceci est un commentaire -->
-    <p class="introduction">Welcome <em>Buddy</em> ! <br /> I'm <strong>glad</strong> to see you today :)<br />
-
-        <img src={{ url_for( 'static', filename='img/profile.png' ) }} alt="GrandPy Bot Pics" title="My name is Py, GrandPy ;) !" /><br /> Do you want to <mark>come</mark> with me ? <a href="zapp.html">Start here</a><br />
-    </p>
-
-    <p>You can send a message to my <a href="mailto:miket972@gmail.com">contact</a> or check my personal
-        <a href="https://www.linkedin.com/in/mickaël-toussaint-923004135" title="Web site" target="_blank">
-        Web site</a>
-    </p>
-
-    <h2 id="zheader_2">Bye !</h2>
-    <p>See you later</p>
-
-</div>
 
 {% endblock %}
