@@ -61,6 +61,10 @@ body {
     max-height: 128px;
 }
 
+.home_avatar {
+    max-height: 128px;
+}
+
 .log_in {
     width: 50%;
     min-width: 400px;
