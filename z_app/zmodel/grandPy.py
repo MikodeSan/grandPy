@@ -27,7 +27,7 @@ def zparse(query, key):
 
     qry = ZQuery()
 
-    query = "donne moi l'adresse de paris"
+    query = "donne moi l'adresse de cluses"
     place = qry.extract_place(query)
 
     # get place geocoding

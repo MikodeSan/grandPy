@@ -1,6 +1,9 @@
 import os
 import shutil
 
+import logging as lg
+
+
 import requests
 import urllib.parse
 
@@ -11,6 +14,9 @@ __GMAPS_STATIC_MAP_URL__ = 'https://maps.googleapis.com/maps/api/staticmap?'
 __TMP_PATH__ = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))), 'static', 'tmp')
 
 
+lg.basicConfig(format='P%(process)s-T%(asctime)s.%(msecs)03d-%(name)s-%(levelname)s: %(message)s', datefmt='%H:%M:%S', level=lg.DEBUG)
+
+
 def gmaps_geocoding_request(query, key):
 
     request_url = gmaps_geocoding_request_url(query, key)
@@ -18,15 +24,21 @@ def gmaps_geocoding_request(query, key):
     geocoding_dict = {}
 
     response = requests.get(request_url)
+    print('response', response)
     if response.status_code == 200:
 
         reply_dict = response.json()
+
+        lg.debug('reply dict')
+        lg.debug(reply_dict)
+
+
         if reply_dict['results'] and reply_dict['status'] == "OK":
 
             location_dict = reply_dict['results'][0]['geometry']['location']
             # print(location_dict)
 
-            gmaps_static_map_request(location_dict, key)
+            # gmaps_static_map_request(location_dict, key)
 
             geocoding_dict = reply_dict
         else:
