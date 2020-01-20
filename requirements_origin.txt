@@ -4,3 +4,5 @@ Flask
 flask_sqlalchemy
 psycopg2
 pycodestyle
+pylint
+pytest

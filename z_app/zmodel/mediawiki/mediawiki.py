@@ -12,7 +12,7 @@ import os
 import logging as lg
 import shutil
 
-import urllib.parse
+# import urllib.parse
 import requests
 
 

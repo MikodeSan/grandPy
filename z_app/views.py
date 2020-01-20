@@ -39,7 +39,8 @@ def zapp():
     # user_name = data.get('strUserQuery')
 
     return render_template('zapp.html',
-                            user_name=user_name)
+                            user_name=user_name,
+                            isApp=True)
 
 
 @app.route('/parse/', methods=['GET', 'POST'])

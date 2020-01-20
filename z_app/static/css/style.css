@@ -56,19 +56,16 @@ body {
     Aquamarine 	#7FFFD4 */
 }
 
-#app_section {
-    background-color: black;
+.page_logo {
+    height: 50%;
+    max-height: 128px;
 }
 
-.introduction* {
-    color: darkorange;
+.home_avatar {
+    max-height: 128px;
 }
 
-#zheader_2 {
-    color: darksalmon;
-}
-
-.app_div {
+.log_in {
     width: 50%;
     min-width: 400px;
     /* Marge intérieure de 12px */
@@ -82,7 +79,35 @@ body {
     background-color: LightSlateGrey;
 }
 
+#app_section {
+    background-color: black;
+}
+
+.introduction* {
+    color: darkorange;
+}
+
+#zheader_2 {
+    color: darksalmon;
+}
+
+.app_div {
+    width: 62%;
+    min-width: 400px;
+    max-width: 2560px;
+    /* Marge intérieure de 12px */
+    padding: 12px;
+    margin: auto;
+    margin-bottom: 12px;
+    word-wrap: break-word;
+    border: 1px;
+    border-radius: 7px;
+    overflow: auto;
+    background-color: darkSlateGrey;
+}
+
 #dialog {
+    height: 60%;
     min-height: 200px;
     max-height: 600px;
     /* text-align: justify;*/
