@@ -1,4 +1,14 @@
+import os
+import shutil
+
+import requests
 import urllib.parse
+
+
+__GMAPS_GEOCODING_URL__ = 'https://maps.googleapis.com/maps/api/geocode/json?'
+__GMAPS_STATIC_MAP_URL__ = 'https://maps.googleapis.com/maps/api/staticmap?'
+
+__TMP_PATH__ = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))), 'static', 'tmp')
 
 
 def gmaps_geocoding_request(query, key):

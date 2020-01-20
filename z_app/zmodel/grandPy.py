@@ -1,18 +1,13 @@
-import os
-import logging as lg
-import shutil
+# import os
+# import logging as lg
 import random
 
-import urllib.parse
-import requests
+# import urllib.parse
+# import requests
 
+from .ggl.gmaps import gmaps_geocoding_request
 from .mediawiki import mediawiki
-
-
-__GMAPS_GEOCODING_URL__ = 'https://maps.googleapis.com/maps/api/geocode/json?'
-__GMAPS_STATIC_MAP_URL__ = 'https://maps.googleapis.com/maps/api/staticmap?'
-
-__TMP_PATH__ = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'static', 'tmp')
+from .query.query import ZQuery
 
 
 class ZGrandPy:
@@ -30,9 +25,13 @@ def zparse(query, key):
 
     place_lst = []
 
+    qry = ZQuery()
+
+    query = "donne moi l'adresse de paris"
+    place = qry.extract_place(query)
 
     # get place geocoding
-    geocoding_dct = gmaps_geocoding_request(query, key)
+    geocoding_dct = gmaps_geocoding_request(place, key)
 
     # get place description
     if geocoding_dct:
