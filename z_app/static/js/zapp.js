@@ -10,7 +10,7 @@ const addQuery = (_strUserQuery) => {
     div.classList.add("query_style");
 }
 
-const addReply = (_strReply, isfound) => {
+const addReply = (_strReply, isfound, map_url) => {
 
     div = addTextDiv();
     time = localTime();
@@ -19,7 +19,8 @@ const addReply = (_strReply, isfound) => {
     console.log(reply);
 
     if (isfound === true) {
-        reply += "<br/> <img src=" + static_map_url + " alt='Static Google Map' title='Google Map'/>";
+        reply += "<br/> <img src=" + map_url + " alt='Static Google Map' title='Google Map'/>";
+
         console.log(reply);
     }
     reply += "</p>";
@@ -49,21 +50,23 @@ getAddress = (reply_json) => {
     console.log(reply_json);
     data = JSON.parse(reply_json);
     isfound = true;
+    map_url = ""
 
     if (data.address) {
 
         reply = "Address: " + data.address + " @ " + "{lat.: " + data.location.lat + "; long.: " + data.location.lng + "}";
+        map_url = data.map
 
     } else {
         reply = "Address not found";
         isfound = false;
     }
 
-    addReply(reply, isfound);
+    addReply(reply, isfound, map_url);
 
     if (data.description) {
 
-        addReply(data.description, false);
+        addReply(data.description, false, "");
     }
 }
 

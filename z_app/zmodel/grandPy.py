@@ -5,7 +5,7 @@ import random
 # import urllib.parse
 # import requests
 
-from .ggl.gmaps import gmaps_geocoding_request
+from .ggl.gmaps import ZGMaps
 from .mediawiki import mediawiki
 from .query.query import ZQuery
 
@@ -18,40 +18,31 @@ class ZGrandPy:
 
 def zparse(query, key):
 
-    reply_dct = {}
-    reply_dct['address'] = ""
-    reply_dct['location'] = {}
-    reply_dct['description'] = ""
-
     place_lst = []
 
     qry = ZQuery()
 
-    query = "donne moi l'adresse de cluses"
+    # extract specified place/spot from query
     place = qry.extract_place(query)
 
     # get place geocoding
-    geocoding_dct = gmaps_geocoding_request(place, key)
+    gmaps = ZGMaps(key)
+    geocoding_dct = gmaps.geocoding_request(place)
 
-    # get place description
     if geocoding_dct:
 
-        result = geocoding_dct['results'][0]
+        latitude = geocoding_dct['location']['lat']
+        longitude = geocoding_dct['location']['lng']
 
-        address = result['formatted_address']
+        # get static map
+        geocoding_dct['map'] = gmaps.static_map_request_url(latitude, longitude)
+        print('maps', geocoding_dct['map'])
 
-        reply_dct['address'] = address
-
-        location = result['geometry']['location']
-        latitude = location['lat']
-        longitude = location['lng']
-        reply_dct['location'] = {'lat': latitude, 'lng': longitude}
-
-        # place page reference
+        # get reference of description page
         place_lst = mediawiki.wikipedia_request_page_from_geocoding(latitude, longitude)
         print("place_lst", place_lst)
 
-        # place description
+        # extract place description
         if place_lst:
 
             nplace = len(place_lst)
@@ -63,11 +54,11 @@ def zparse(query, key):
             place = random.choice(place_lst[:idx_max])
 
             description = mediawiki.wikipedia_extract_page(place['pageid'])
-            reply_dct['description'] = description
+            geocoding_dct['description'] = description
 
             print("description app:", description)
 
-    return reply_dct
+    return geocoding_dct
 
 
 

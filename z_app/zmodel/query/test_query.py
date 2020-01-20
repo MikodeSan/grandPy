@@ -16,7 +16,7 @@ class TestQuery:
 
         spot = query.extract_place(quote)
 
-        assert spot == "OpenClassrooms"
+        assert spot == "OpenClassrooms "
 
     # def test_latitude_degrees_range():
     #     with pytest.raises(AssertionError):

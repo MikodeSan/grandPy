@@ -49,7 +49,7 @@ class ZQuery:
             word_lst = spot.split();
             print("Split", word_lst)
 
-            spot = ''.join([w for w in word_lst if w not in self.__STOP_WORD_FR_LIST__] )
+            spot = ''.join([w + " " for w in word_lst if w not in self.__STOP_WORD_FR_LIST__] )
             print(spot)
 
 
