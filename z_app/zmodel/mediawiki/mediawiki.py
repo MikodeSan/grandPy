@@ -104,7 +104,7 @@ def wikipedia_extract_page(pageid):
             while str_tmp and enable:
 
                 # print(idx, "str_tmp:", str_tmp)
-                desc_lst.append(str_tmp.pop(0))
+                desc_lst.append(str_tmp.pop(0).replace("\n", "<br/>"))
                 # print(idx, "desc:", desc_lst)
                 # print(idx, "str_tmp:", str_tmp)
 
