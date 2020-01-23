@@ -54,7 +54,7 @@ class ZGMaps:
 
     def __geocoding_request_url(self, _place):
 
-        params = {'address': _place, 'language': 'fr', 'key': self.__key}
+        params = {'address': _place, 'language': 'fr', 'region': 'fr', 'key': self.__key}
         url = self.__GMAPS_GEOCODING_URL__ + urllib.parse.urlencode(params)
         # print(url)
         return url

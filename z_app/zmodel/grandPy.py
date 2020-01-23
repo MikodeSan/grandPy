@@ -20,10 +20,10 @@ def zparse(query, key):
 
     place_lst = []
 
-    qry = ZQuery()
+    qry = ZQuery(query)
 
     # extract specified place/spot from query
-    place = qry.extract_place(query)
+    place = qry.spot
 
     # get place geocoding
     gmaps = ZGMaps(key)
