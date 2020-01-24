@@ -1,3 +1,6 @@
+var async_spinner_id;
+var isDone = false;
+
 const dialog = document.getElementById('dialog');
 
 
@@ -44,8 +47,15 @@ const localTime = () => {
     return date.toLocaleTimeString();
 }
 
+async function wait_trigger() {
 
-getAddress = (reply_json) => {
+    while (isDone == false) {};
+    return;
+};
+
+
+async function getAddress(reply_json) {
+    console.log('isdone =' + isDone);
 
     console.log(reply_json);
     data = JSON.parse(reply_json);
@@ -62,6 +72,15 @@ getAddress = (reply_json) => {
         isfound = false;
     }
 
+    console.log('isdone =' + isDone);
+    await setTimeout(function() {
+        isDone = true;
+        console.log('trigger timeout');
+    }, 3000);
+    console.log('isdone =' + isDone);
+    isDone = false;
+
+
     addReply(reply, isfound, map_url);
 
     if (data.description) {
@@ -75,6 +94,21 @@ userInput_form.addEventListener('submit', function(event) {
 
     event.preventDefault();
     event.stopPropagation();
+
+    // disable text input form
+    // Last name: <input type="text" name="lname" disabled><br>
+
+    // Display spinner and start interval timer
+    display_spinner();
+    // async_spinner_id = setInterval(function() { display_spinner() }, 250);
+
+    // start spinner timout delay
+    // setTimeout(function() { clearInterval(async_spinner_id); }, 3000);
+    // setTimeout(function() {
+    //     isDone = true;
+    //     console.log('trigger timeout');
+    // }, 3000);
+
 
     const userText_form = document.getElementById('query_text');
 
@@ -100,6 +134,26 @@ userInput_form.addEventListener('submit', function(event) {
 
     userText_form.value = "";
 });
+
+const display_spinner = () => {
+
+    div = addTextDiv();
+
+    // div.innerHTML = "<p><i id='spin_id' class='far fa-compass'></i></p>";
+    // div.innerHTML = "<p><img class='home_avatar' src={{ url_for( 'static', filename='img/grand_father_lineal_color_2369096.png' ) }}/>";
+    // div.innerHTML = "<p class='loader'><img id='pin_id' class='home_avatar' src='../static/img/grand_father_lineal_color_2369096.png'/></p>";
+    div.innerHTML = "<p><img id='pin_id' class='loader' src='../static/img/compass-regular.svg'/></p>";
+    // div.innerHTML = "<p></p>";
+
+    div.classList.add("query_style");
+
+    // var c = document.getElementById("spin_id");
+    // console.log(c)
+    // var ctx = c.getContext("2d");
+    // console.log(ctx)
+
+    // ctx.rotate(20 * Math.PI / 180);
+}
 
 //elt.removeChild(newElt);    // Supprime l'élément newElt de l'élément elt
 //elt.replaceChild(document.createElement("article"), newElt);    // Remplace l'élément newElt par un nouvel élément de type article
