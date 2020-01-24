@@ -95,45 +95,53 @@ userInput_form.addEventListener('submit', function(event) {
     event.preventDefault();
     event.stopPropagation();
 
-    // disable text input form
-    // Last name: <input type="text" name="lname" disabled><br>
-
-    // Display spinner and start interval timer
-    display_spinner();
-    // async_spinner_id = setInterval(function() { display_spinner() }, 250);
-
-    // start spinner timout delay
-    // setTimeout(function() { clearInterval(async_spinner_id); }, 3000);
-    // setTimeout(function() {
-    //     isDone = true;
-    //     console.log('trigger timeout');
-    // }, 3000);
-
-
     const userText_form = document.getElementById('query_text');
 
     strUserText = userText_form.value;
     if (strUserText) {
 
+        // disable text input form
+        // Last name: <input type="text" name="lname" disabled><br>
+
         addQuery(strUserText);
+
+        // Display spinner and start interval timer
+        display_spinner();
+        // async_spinner_id = setInterval(function() { display_spinner() }, 250);
+
+        // start spinner timout delay
+        // setTimeout(function() { clearInterval(async_spinner_id); }, 3000);
+        // setTimeout(function() {
+        //     isDone = true;
+        //     console.log('trigger timeout');
+        // }, 3000);
+
+        // // Création des informations sur le profil
+        // var avatarElt = document.createElement("img");
+        // avatarElt.src = profil.avatar_url;
+        // avatarElt.style.height = "150px";
+        // avatarElt.style.width = "150px";
+
+        let data = new FormData(userInput_form);
+
+        zajaxPost(parse_url, data, getAddress, remove_maps_loader, false);
+
+        userText_form.value = "";
     }
-
-    let user_Object = {
-        my_query: strUserText
-    };
-
-    // // Création des informations sur le profil
-    // var avatarElt = document.createElement("img");
-    // avatarElt.src = profil.avatar_url;
-    // avatarElt.style.height = "150px";
-    // avatarElt.style.width = "150px";
-
-    let data = new FormData(userInput_form);
-
-    zajaxPost(parse_url, data, getAddress, false);
-
-    userText_form.value = "";
 });
+
+const remove_maps_loader = () => {
+
+    let div = document.getElementById("map_loader_id");
+
+    if (div) {
+        var waitUntil = new Date().getTime() + 1.5 * 1000;
+        while (new Date().getTime() < waitUntil) true;
+
+        div.parentNode.removeChild(div);
+    }
+};
+
 
 const display_spinner = () => {
 
@@ -142,10 +150,9 @@ const display_spinner = () => {
     // div.innerHTML = "<p><i id='spin_id' class='far fa-compass'></i></p>";
     // div.innerHTML = "<p><img class='home_avatar' src={{ url_for( 'static', filename='img/grand_father_lineal_color_2369096.png' ) }}/>";
     // div.innerHTML = "<p class='loader'><img id='pin_id' class='home_avatar' src='../static/img/grand_father_lineal_color_2369096.png'/></p>";
-    div.innerHTML = "<p><img id='pin_id' class='loader' src='../static/img/compass-regular.svg'/></p>";
-    // div.innerHTML = "<p></p>";
-
-    div.classList.add("query_style");
+    div.innerHTML = "<p><img class='loader' src='../static/img/compass-regular.svg'/></p>";
+    div.id = "map_loader_id";
+    div.classList.add("reply_style");
 
     // var c = document.getElementById("spin_id");
     // console.log(c)
