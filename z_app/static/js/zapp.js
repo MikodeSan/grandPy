@@ -1,6 +1,18 @@
 var async_spinner_id;
 var isDone = false;
 
+// document.onload = function 
+document.addEventListener('readystatechange', event => {
+
+    // if (event.target.readyState === "interactive") { //same as:  ..addEventListener("DOMContentLoaded".. and   jQuery.ready
+    //     alert("All HTML DOM elements are accessible");
+    // }
+
+    if (event.target.readyState === "complete") {
+        addReply(welcome, false, null);
+    }
+});
+
 const dialog = document.getElementById('dialog');
 
 
@@ -62,29 +74,31 @@ async function getAddress(reply_json) {
     isfound = true;
     map_url = ""
 
-    if (data.address) {
+    reply = data.reply;
+    addReply(reply, false, null);
 
-        reply = "Address: " + data.address + " @ " + "{lat.: " + data.location.lat + "; long.: " + data.location.lng + "}";
+    if (data.address) {
+        reply = "Voici: " + data.address + " @ " + "[lat.: " + data.location.lat + "; long.: " + data.location.lng + "]";
         map_url = data.map
 
     } else {
-        reply = "Address not found";
+        reply = data.address_reply;
         isfound = false;
     }
 
-    console.log('isdone =' + isDone);
-    await setTimeout(function() {
-        isDone = true;
-        console.log('trigger timeout');
-    }, 3000);
-    console.log('isdone =' + isDone);
-    isDone = false;
+    // console.log('isdone =' + isDone);
+    // await setTimeout(function() {
+    //     isDone = true;
+    //     console.log('trigger timeout');
+    // }, 3000);
+    // console.log('isdone =' + isDone);
+    // isDone = false;
 
 
     addReply(reply, isfound, map_url);
 
     if (data.description) {
-
+        addReply("Mais laisse moi te parler d'une chose assez étonnante non loin de là", false, "");
         addReply(data.description, false, "");
     }
 }
