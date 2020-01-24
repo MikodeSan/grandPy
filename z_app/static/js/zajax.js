@@ -23,13 +23,16 @@ function zajaxGet(url, callback) {
     request.send(null);
 }
 
-function zajaxPost(url, data, callback, isJson) {
+function zajaxPost(url, data, callback, callback_sync, isJson) {
 
     let request = new XMLHttpRequest();
 
     request.open("POST", url);
 
     request.addEventListener("load", function() {
+
+        // signal response is received
+        callback_sync();
         if (request.status >= 200 && request.status < 400) {
 
             callback(request.responseText);
@@ -39,6 +42,8 @@ function zajaxPost(url, data, callback, isJson) {
     });
 
     request.addEventListener("error", function() {
+        // signal response is received
+        callback_sync();
         console.error("Erreur réseau avec l'URL " + url);
     });
 
