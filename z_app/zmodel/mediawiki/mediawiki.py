@@ -77,7 +77,7 @@ def wikipedia_extract_page(pageid):
         "pageids": pageid,
         "prop": "extracts",
         #"exintro": "true",
-        "exsentences": 7,
+        "exsentences": 3,
         "explaintext": "true",
         "exsectionformat": "wiki",
         "format": "json",

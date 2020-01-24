@@ -74,16 +74,15 @@ async function getAddress(reply_json) {
     isfound = true;
     map_url = ""
 
+    reply = data.reply;
+    addReply(reply, false, null);
+
     if (data.address) {
-
-        reply = data.reply;
-        addReply(reply, false, null);
         reply = "Voici: " + data.address + " @ " + "[lat.: " + data.location.lat + "; long.: " + data.location.lng + "]";
-
         map_url = data.map
 
     } else {
-        reply = data.reply;
+        reply = data.address_reply;
         isfound = false;
     }
 
@@ -99,7 +98,7 @@ async function getAddress(reply_json) {
     addReply(reply, isfound, map_url);
 
     if (data.description) {
-
+        addReply("Mais laisse moi te parler d'une chose assez étonnante non loin de là", false, "");
         addReply(data.description, false, "");
     }
 }

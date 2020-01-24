@@ -18,7 +18,7 @@ class ZGrandPy:
 
 _HELLO_ = ["Hello", "Salut", "Comment vas-tu", "Hooo"]
 
-_NICK_NAME_ = ["mon poussin", "mon coeur", "mon petit marshmallow", "mon petit chou à la crème"]
+_NICK_NAME_ = ["mon poussin", "mon coeur", "mon petit marshmallow", "mon petit chou à la crème", "mon ange"]
 _WELCOME_ = ["ravis de te revoir", "ça me fait tellement plaisir de te revoir", "ton grandpy est toujours heureux de te voir", ]
 _PROPOSAL_ = ["quel endroit cherches-tu cette fois", "quel lieu souhaites-tu visiter cette fois-ci", "où souhaites-tu aller aujourd'hui"]
 
@@ -48,7 +48,7 @@ def zparse(query, key):
     geocoding_dct['place'] = place
     is_understood = False
 
-    if not place:
+    if not place or (len(place) == 1 and place[0] == ""):
         geocoding_dct['reply'] = no_place()
 
     elif len(place) == 1:
@@ -96,6 +96,9 @@ def zparse(query, key):
                 geocoding_dct['description'] = description
 
                 print("description app:", description)
+
+        else:
+            geocoding_dct['address_reply'] = random.choice(_EXCUSE_) + " :( " + random.choice(_NICK_NAME_) + ", je ne connais pas cette adresse, pourtant il en connait des choses grand-py ^^'"
 
     return geocoding_dct
 
