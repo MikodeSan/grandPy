@@ -76,21 +76,24 @@ async function getAddress(reply_json) {
 
     if (data.address) {
 
-        reply = "Address: " + data.address + " @ " + "{lat.: " + data.location.lat + "; long.: " + data.location.lng + "}";
+        reply = data.reply;
+        addReply(reply, false, null);
+        reply = "Voici: " + data.address + " @ " + "[lat.: " + data.location.lat + "; long.: " + data.location.lng + "]";
+
         map_url = data.map
 
     } else {
-        reply = "Address not found";
+        reply = data.reply;
         isfound = false;
     }
 
-    console.log('isdone =' + isDone);
-    await setTimeout(function() {
-        isDone = true;
-        console.log('trigger timeout');
-    }, 3000);
-    console.log('isdone =' + isDone);
-    isDone = false;
+    // console.log('isdone =' + isDone);
+    // await setTimeout(function() {
+    //     isDone = true;
+    //     console.log('trigger timeout');
+    // }, 3000);
+    // console.log('isdone =' + isDone);
+    // isDone = false;
 
 
     addReply(reply, isfound, map_url);
