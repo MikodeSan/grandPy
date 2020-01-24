@@ -1,6 +1,18 @@
 var async_spinner_id;
 var isDone = false;
 
+// document.onload = function 
+document.addEventListener('readystatechange', event => {
+
+    // if (event.target.readyState === "interactive") { //same as:  ..addEventListener("DOMContentLoaded".. and   jQuery.ready
+    //     alert("All HTML DOM elements are accessible");
+    // }
+
+    if (event.target.readyState === "complete") {
+        addReply(welcome, false, null);
+    }
+});
+
 const dialog = document.getElementById('dialog');
 
 

@@ -16,6 +16,14 @@ class ZGrandPy:
         pass
 
 
+_HELLO_ = ["Hello", "Salut", "Comment vas-tu", "Hooo !!!"]
+_NICK_NAME_ = ["mon poussin", "mon coeur", "mon petit marshmallow"]
+_WELCOME_ = ["ravis de te revoir", "ça me fait tellement plaisir de te revoir", "ton grandpy est toujours heureux de te voir", ]
+_PROPOSAL_ = ["quel endroit cherches-tu cette fois?", "quel lieu souhaites-tu visiter cette fois-ci", "où souhaites-tu aller aujourd'hui"]
+
+_HdELLO_ = ["Hello", "Salut", "Comment vas-tu", "Hooo !!!"]
+
+
 def zparse(query, key):
 
     place_lst = []
@@ -60,6 +68,15 @@ def zparse(query, key):
 
     return geocoding_dct
 
+
+def welcome():
+
+    hello = random.choice(_HELLO_)
+    nick = random.choice(_NICK_NAME_)
+    welcome = random.choice(_WELCOME_)
+    proposal = random.choice(_PROPOSAL_)
+
+    return hello + " " + nick + ", " + welcome + " ! " + proposal + " ?"
 
 
 def parse():

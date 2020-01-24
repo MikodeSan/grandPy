@@ -38,9 +38,12 @@ def zapp():
     user_name = request.args.get('user_name')
     # user_name = data.get('strUserQuery')
 
+    _welcome = grandPy.welcome()
+
     return render_template('zapp.html',
                             user_name=user_name,
-                            isApp=True)
+                            isApp=True,
+                            welcome=_welcome)
 
 
 @app.route('/parse/', methods=['GET', 'POST'])
