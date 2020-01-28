@@ -1,6 +1,7 @@
 <header>
-    <h1 id="zheader_1"> {% if isApp: %} <img class='page_logo' src={{ url_for( 'static', filename='img/grand_father_lineal_color_2369096.png' ) }} alt="GrandPy Bot Pics" title="My name is Py, GrandPy ;) !" />{% endif %} ZGrandPy Bot</h1>
-    <h2 id="zheader_2">Les récits de papy robot</h2>
+    <h1>{% if isApp: %} <img class='page_logo' src={{ url_for( 'static', filename='img/grand_father_lineal_color_2369096.png' ) }} alt="GrandPy Bot Pics" title="My name is Py, GrandPy ;) !" />{% endif %} ZGrandPy Bot</h1>
+    <h2>Les récits de papy robot</h2>
+    <p style="font-size: large;">Viens t'assoir et discuter un peu avec <strong>Grand-Py</strong><br/> Quelle anecdote va-t-il encore nous raconter aujourd'hui?</p>
 
     {% if user_name: %}
     <p>Hello {{user_name}} :D</p>
