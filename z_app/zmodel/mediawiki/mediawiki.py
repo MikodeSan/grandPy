@@ -12,7 +12,7 @@ import os
 import logging as lg
 import shutil
 
-import urllib.parse
+# import urllib.parse
 import requests
 
 
@@ -77,7 +77,7 @@ def wikipedia_extract_page(pageid):
         "pageids": pageid,
         "prop": "extracts",
         #"exintro": "true",
-        "exsentences": 7,
+        "exsentences": 3,
         "explaintext": "true",
         "exsectionformat": "wiki",
         "format": "json",
@@ -104,7 +104,7 @@ def wikipedia_extract_page(pageid):
             while str_tmp and enable:
 
                 # print(idx, "str_tmp:", str_tmp)
-                desc_lst.append(str_tmp.pop(0))
+                desc_lst.append(str_tmp.pop(0).replace("\n", "<br/>"))
                 # print(idx, "desc:", desc_lst)
                 # print(idx, "str_tmp:", str_tmp)
 

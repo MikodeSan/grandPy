@@ -1,18 +1,13 @@
-import os
-import logging as lg
-import shutil
+# import os
+# import logging as lg
 import random
 
-import urllib.parse
-import requests
+# import urllib.parse
+# import requests
 
+from .ggl.gmaps import ZGMaps
 from .mediawiki import mediawiki
-
-
-__GMAPS_GEOCODING_URL__ = 'https://maps.googleapis.com/maps/api/geocode/json?'
-__GMAPS_STATIC_MAP_URL__ = 'https://maps.googleapis.com/maps/api/staticmap?'
-
-__TMP_PATH__ = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'static', 'tmp')
+from .query.query import ZQuery
 
 
 class ZGrandPy:
@@ -21,133 +16,143 @@ class ZGrandPy:
         pass
 
 
-def zparse(query, key):
+_HELLO_ = ["Hello", "Salut", "Comment vas-tu", "Hooo"]
 
-    reply_dct = {}
-    reply_dct['address'] = ""
-    reply_dct['location'] = {}
-    reply_dct['description'] = ""
+_NICK_NAME_ = ["mon poussin", "mon coeur", "mon petit marshmallow", "mon petit chou à la crème", "mon ange"]
+_WELCOME_ = ["ravis de te revoir", "ça me fait tellement plaisir de te revoir", "ton grandpy est toujours heureux de te voir", ]
+_PROPOSAL_ = ["quel endroit cherches-tu cette fois", "quel lieu souhaites-tu visiter cette fois-ci", "où souhaites-tu aller aujourd'hui"]
+
+_INTERLOCUTION_ = ["Ho Hoo", "Ah oui ?", "Voyez-vous ça", "Hmmm", "Aaahh", "Oh très bien"]
+# _INTERLOCUTION_ = ["Ho Hoo", "Ah oui ?", "Voyez-vous ça", "Hmmm", "Aaahh"]
+
+_QUESTION_ = ["tu cherches", "tu veux savoir où se situe", "tu connais l'adresse de", "tu demandes où est"]
+
+_EXCUSE_ = ["Houlala", "Aïe aïe aïe", "Excuse moi", "Hooo désolé"]
+_EXCUSE_2_ = ["Je n'ai pas bien compris", "j'ai mal entendu", "j'ai dû loupé quelques mots", "je crois que je n'ai plus les oreilles de ma jeunesse"]
+_REFORM_ = ["peux-tu reformuler ta question", "peux-tu reprendre plus simplement pour ton petit grand-py chéri", "où veux-tu aller", "redis moi ça s'il te plait", "plus doucement s'il te plait", "s'il te plait, parle moins vite"]
+# _EXCUSE_ = ["Houlala", "Aïe Aïe", "Excuse moi", "Hooo Désolé"]
+# _EXCUSE_ = ["Houlala", "Aïe Aïe", "Excuse moi", "Hooo Désolé"]
+
+
+def zparse(query, key):
 
     place_lst = []
 
+    qry = ZQuery(query)
+    geocoding_dct = {}
 
-    # get place geocoding
-    geocoding_dct = gmaps_geocoding_request(query, key)
+    # extract specified place/spot from query
+    place = qry.spot
+    print("place: ", place)
 
-    # get place description
-    if geocoding_dct:
+    geocoding_dct['place'] = place
+    is_understood = False
 
-        result = geocoding_dct['results'][0]
+    if not place or (len(place) == 1 and place[0] == ""):
+        geocoding_dct['reply'] = no_place()
 
-        address = result['formatted_address']
-
-        reply_dct['address'] = address
-
-        location = result['geometry']['location']
-        latitude = location['lat']
-        longitude = location['lng']
-        reply_dct['location'] = {'lat': latitude, 'lng': longitude}
-
-        # place page reference
-        place_lst = mediawiki.wikipedia_request_page_from_geocoding(latitude, longitude)
-        print("place_lst", place_lst)
-
-        # place description
-        if place_lst:
-
-            nplace = len(place_lst)
-            nplace_max = 3
-
-            idx_max = min(nplace, nplace_max)
-            print(idx_max)
-
-            place = random.choice(place_lst[:idx_max])
-
-            description = mediawiki.wikipedia_extract_page(place['pageid'])
-            reply_dct['description'] = description
-
-            print("description app:", description)
-
-    return reply_dct
+    elif len(place) == 1:
+        geocoding_dct['reply'] = defined_place(place[0])
+        is_understood = True
+    else:
+        geocoding_dct['reply'] = many_place(place)
 
 
-def gmaps_geocoding_request(query, key):
+    if is_understood:
 
-    request_url = gmaps_geocoding_request_url(query, key)
+        # get place geocoding
+        gmaps = ZGMaps(key)
+        dct = gmaps.geocoding_request(place)
+        print("geocode_dct: ", dct)
 
-    geocoding_dict = {}
+        if dct:
 
-    response = requests.get(request_url)
-    if response.status_code == 200:
+            geocoding_dct['address'] = dct['address']
+            geocoding_dct['location'] = dct['location']
 
-        reply_dict = response.json()
-        if reply_dict['results'] and reply_dict['status'] == "OK":
+            latitude = geocoding_dct['location']['lat']
+            longitude = geocoding_dct['location']['lng']
 
-            location_dict = reply_dict['results'][0]['geometry']['location']
-            # print(location_dict)
+            # get static map
+            geocoding_dct['map'] = gmaps.static_map_request_url(latitude, longitude)
+            print('maps', geocoding_dct['map'])
 
-            gmaps_static_map_request(location_dict, key)
+            # get reference of description page
+            place_lst = mediawiki.wikipedia_request_page_from_geocoding(latitude, longitude)
+            print("place_lst", place_lst)
 
-            geocoding_dict = reply_dict
+            # extract place description
+            if place_lst:
+
+                nplace = len(place_lst)
+                nplace_max = 3
+
+                idx_max = min(nplace, nplace_max)
+                print(idx_max)
+
+                place = random.choice(place_lst[:idx_max])
+
+                description = mediawiki.wikipedia_extract_page(place['pageid'])
+                geocoding_dct['description'] = description
+
+                print("description app:", description)
+
         else:
-            print('address not found')
-    else:
-        print('google reply error')
+            geocoding_dct['address_reply'] = random.choice(_EXCUSE_) + " :( " + random.choice(_NICK_NAME_) + ", je ne connais pas cette adresse, pourtant il en connait des choses grand-py ^^'"
 
-    del response
-
-    return geocoding_dict
+    return geocoding_dct
 
 
-def gmaps_geocoding_request_url(query, key):
+def welcome():
 
-    params = {'address': query, 'key': key}
-    url = __GMAPS_GEOCODING_URL__ + urllib.parse.urlencode(params)
-    # print(url)
-    return url
+    hello = random.choice(_HELLO_)
+    nick = random.choice(_NICK_NAME_)
+    welcome = random.choice(_WELCOME_)
+    proposal = random.choice(_PROPOSAL_)
 
-
-def gmaps_static_map_request(location, key):
-
-    map_url = gmaps_static_map_request_url(location, key)
-    print(map_url)
-
-    # Store static map image into temporary directory
-    response = requests.get(map_url, stream=True)
-    if response.status_code == 200:
-        image_path = __TMP_PATH__ + "\{}".format("map.png")
-        # print(image_path)
-
-        # If file exists, delete it
-        if os.path.isfile(image_path):
-            os.remove(image_path)
-
-        # Create image file from url
-        with open(image_path, 'wb') as out_file:
-            response.raw.decode_content = True
-            shutil.copyfileobj(response.raw, out_file)
-    else:
-        print('google static map error')
-
-    del response
+    return hello + " " + nick + ", " + welcome + " ! " + proposal + " ?"
 
 
-def gmaps_static_map_request_url(location, key):
+def no_place():
 
-    lat = location['lat']
-    lng = location['lng']
-    loc = "{},{}".format(lat, lng)
-    print(loc)
-    size = "{}x{}".format(240, 240)     # IPhone [480 × 320] ; standard_min [320 x 200|240]
-    print(size)
-    markers = []
-    pin = "color:blue|label:P|{},{}".format(lat,lng)
-    print(pin)
-    markers.append(pin)
-    params = {'center': loc, 'zoom': 14, 'size': size, 'maptype': 'roadmap', 'markers': markers, 'key': key}
-    url = __GMAPS_STATIC_MAP_URL__ + urllib.parse.urlencode(params, doseq=True)
-    # print(url)
-    return url
+    excuse = random.choice(_EXCUSE_)
+    nick = random.choice(_NICK_NAME_)
+    n_excuse = random.choice(_EXCUSE_2_)
+    reform = random.choice(_REFORM_)
+
+    return excuse + " " + nick + ", " + n_excuse + " ... " + reform + " ?"
+
+
+def defined_place(place):
+
+    interloc = random.choice(_INTERLOCUTION_)
+    nick = random.choice(_NICK_NAME_)
+    question = random.choice(_QUESTION_)
+
+    return interloc + " ! " + question + " ... " + place + " " + nick + " ?"
+
+
+def many_place(_place_lst):
+
+    excuse = random.choice(_EXCUSE_)
+    nick = random.choice(_NICK_NAME_)
+    n_excuse = random.choice(_EXCUSE_2_)
+    proposal = random.choice(_PROPOSAL_)
+    reform = random.choice(_REFORM_)
+
+    s = excuse + " " + nick + ", " + n_excuse + ", " + reform + " ... " + proposal + " ? "
+
+    for idx, place in enumerate(_place_lst):
+
+        n = len(_place_lst) - 1
+        if idx == n and n != 0:
+            s += " ou "
+        elif idx < n and idx != 0:
+            s += ", "
+
+        s += place
+
+    return s
 
 
 def parse():

@@ -4,13 +4,28 @@ style.css
 */
 
 html {
-    font: Arial, Helvetica, Calibri, Candara, sans-serif;
+    font-family: underwood_champion-webfont, actionman_regular_macroman, Candara, "Comic Sans MS", Calibri, Verdana, "Tempus Sans ITC", "Trebuchet MS", Helvetica, serif, sans-serif;
     color: Ivory
+    /* Arial ;
+Arial Black ;
+Comic Sans MS ;
+Courier New ;
+Georgia ;
+Impact ;
+Times New Roman ;
+Trebuchet MS ;
+Verdana */
 }
 
-header,
-footer {
-    background-color: SlateGrey;
+@font-face {
+    font-family: 'actionman_regular_macroman';
+    src: url('actionman_regular_macroman.eot');
+    src: url('actionman_regular_macroman.eot?iefix') format('eot'), url('actionman_regular_macroman.woff') format('woff'), url('actionman_regular_macroman.ttf') format('truetype'), url('actionman_regular_macroman.svg#webfont') format('svg');
+}
+
+@font-face {
+    font-family: 'underwood_champion-webfont';
+    src: url('underwood_champion-webfont.woff');
 }
 
 body {
@@ -56,8 +71,27 @@ body {
     Aquamarine 	#7FFFD4 */
 }
 
+header,
+footer {
+    font-size: large;
+    background-color: SlateGrey;
+}
+
+h1 {
+    font-size: xx-large;
+}
+
+h2 {
+    color: darksalmon;
+    font-size: x-large;
+}
+
 .page_logo {
     height: 50%;
+    max-height: 128px;
+}
+
+.home_avatar {
     max-height: 128px;
 }
 
@@ -81,10 +115,6 @@ body {
 
 .introduction* {
     color: darkorange;
-}
-
-#zheader_2 {
-    color: darksalmon;
 }
 
 .app_div {
@@ -130,4 +160,56 @@ body {
     color: ivory;
     text-align: left;
     border: 1px solid salmon;
+}
+
+.loader {
+    align-self: right;
+    /* to define */
+    border: 3px solid #f3f3f3;
+    border-radius: 50%;
+    border-top: 3px solid #3498db;
+    width: 24px;
+    height: 24px;
+    -webkit-animation: spin 1s linear infinite;
+    /* Safari */
+    animation: spin 1s linear infinite;
+}
+
+
+/* Safari */
+
+@-webkit-keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    25% {
+        transform: rotate(45deg);
+    }
+    50% {
+        transform: rotate(0deg);
+    }
+    75% {
+        transform: rotate(-45deg);
+    }
+    100% {
+        transform: rotate(0deg);
+    }
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    25% {
+        transform: rotate(45deg);
+    }
+    50% {
+        transform: rotate(0deg);
+    }
+    75% {
+        transform: rotate(-45deg);
+    }
+    100% {
+        transform: rotate(0deg);
+    }
 }
