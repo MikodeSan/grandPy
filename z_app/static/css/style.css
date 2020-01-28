@@ -77,6 +77,12 @@ footer {
     background-color: SlateGrey;
 }
 
+.page_logo {
+    height: 40%;
+    max-height: 96px;
+    float: left;
+}
+
 h1 {
     font-size: xx-large;
 }
@@ -86,9 +92,10 @@ h2 {
     font-size: x-large;
 }
 
-.page_logo {
-    height: 50%;
-    max-height: 128px;
+.header_description {
+    font-style: italic;
+    font-size: large;
+    clear: both;
 }
 
 .home_avatar {
