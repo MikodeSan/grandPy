@@ -101,7 +101,7 @@ class ZGMaps:
 
         loc = "{},{}".format(_latitude, _longitude)
         print(loc)
-        size = "{}x{}".format(240, 240)     # IPhone [480 × 320] ; standard_min [320 x 200|240]
+        size = "{}x{}".format(280, 280)     # IPhone [480 × 320] ; standard_min [320 x 200|240]
         print(size)
         markers = []
         pin = "color:blue|label:P|{},{}".format(_latitude, _longitude)

@@ -18,7 +18,8 @@ html,
 body {
     font-family: underwood_champion-webfont, actionman_regular_macroman, Candara, "Comic Sans MS", Calibri, Verdana, "Tempus Sans ITC", "Trebuchet MS", Helvetica, Arial, serif, sans-serif;
     color: Ivory;
-    background-color: darkslategrey;
+    /* background-color: darkslategrey; */
+    background-color: black;
     /* 
     white #FFFFFF
     whitesmoke #F5F5F5
@@ -71,7 +72,7 @@ body {
     min-height: 100%;
     padding: 0;
     margin: 0;
-    border: solid ivory;
+    /* border: solid ivory; */
 }
 
 header,
@@ -80,32 +81,32 @@ footer {
     background-color: slategrey;
     min-height: 128px;
     max-height: 192px;
-    border: solid ivory;
+    /* border: solid ivory; */
 }
 
 .page_logo {
     height: 40%;
     max-height: 96px;
     float: left;
-    border: solid ivory;
+    /* border: solid ivory; */
 }
 
 h1 {
     font-size: xx-large;
-    border: solid ivory;
+    /* border: solid ivory; */
 }
 
 h2 {
     color: darksalmon;
     font-size: x-large;
-    border: solid ivory;
+    /* border: solid ivory; */
 }
 
 .header_description {
     font-style: italic;
     font-size: large;
     clear: both;
-    border: solid ivory;
+    /* border: solid ivory; */
 }
 
 .home_avatar {
@@ -126,7 +127,13 @@ h2 {
     background-color: LightSlateGrey;
 }
 
+.introduction* {
+    color: darkorange;
+    border: solid ivory;
+}
+
 #app_section {
+    font-size: medium;
     background-color: black;
     /* width: 100%; */
     /* width: 320; 640; 768; 900; 960; 1024; 1080; 1280; 1920 */
@@ -140,60 +147,100 @@ h2 {
     height: calc(100% - 256px);
     min-height: 240px;
     margin: auto;
-    border: solid ivory;
-}
-
-.introduction* {
-    color: darkorange;
-    border: solid ivory;
+    /* border: solid ivory; */
 }
 
 .app_div {
-    /* width: 62%; */
-    /* min-width: 400px;
-    max-width: 2560px; */
-    /* Marge intérieure de 12px */
-    padding: 12px;
-    /* margin: auto; */
-    /* margin-bottom: 12px; */
     word-wrap: break-word;
-    border: 1px;
-    border-radius: 12px;
     overflow: auto;
-    /* background-color: darkSlateGrey; */
-    border: solid ivory;
+    border-radius: 12px;
+    /* border: solid ivory; */
 }
 
 #dialog {
     /* height: 60%; */
     min-height: 200px;
     max-height: 600px;
-    /* text-align: justify;*/
-    border: solid ivory;
+    margin-bottom: 16px;
+    /* border: solid ivory; */
 }
 
 #user_input {
     /* height: 24px; */
     text-align: right;
-    /* padding-top: 12px; */
-    border: solid ivory;
+    padding: 0px;
+    /* border: solid red; */
 }
 
 #user_input_form {
-    /* width: 100%; */
-    border: 1px solid black;
+    width: 100%;
+}
+
+#user_input_p {
+    margin: 0px
+}
+
+#query_text {
+    font-family: Candara;
+    font-size: medium;
+    color: ivory;
+    background: DarkGrey;
+    padding-left: 12px;
+    padding-right: 12px;
+    padding-top: 3px;
+    padding-bottom: 3px;
+    border-radius: 50px;
 }
 
 .query_style {
-    color: darkblue;
     text-align: right;
-    border: 1px solid blue;
+    width: 92%;
+    margin-bottom: 7px;
+    /* border: 3px solid ivory; */
+    float: right;
+}
+
+#query {
+    text-align: right;
+    background: darkblue;
+    padding-left: 12px;
+    padding-right: 12px;
+    padding-top: 3px;
+    padding-bottom: 3px;
+    margin: 0px;
+    border: none;
+    border-radius: 12px;
 }
 
 .reply_style {
-    color: ivory;
     text-align: left;
-    border: 1px solid salmon;
+    width: 92%;
+    margin-bottom: 7px;
+    /* border: 3px solid salmon; */
+    float: left;
+}
+
+#reply {
+    text-align: left;
+    background: dimgrey;
+    padding-left: 12px;
+    padding-right: 12px;
+    padding-top: 3px;
+    padding-bottom: 3px;
+    margin: 0px;
+    border: none;
+    border-radius: 12px;
+}
+
+.time {
+    font-size: smaller;
+    padding-left: 12px;
+    padding-right: 12px;
+    padding-top: 0px;
+    padding-bottom: 0px;
+    margin-top: 0px;
+    margin-bottom: 3px;
+    /* border: 1px solid ivory; */
 }
 
 .loader {
