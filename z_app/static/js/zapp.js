@@ -21,7 +21,7 @@ const addQuery = (_strUserQuery) => {
     div = addTextDiv();
     time = localTime();
 
-    div.innerHTML = "<p>" + _strUserQuery + " - " + time + "</p>";
+    div.innerHTML = "<p id='query'>" + _strUserQuery + "</p>" + "<span class=time>" + time + "</span>";
     div.classList.add("query_style");
 }
 
@@ -30,16 +30,14 @@ const addReply = (_strReply, isfound, map_url) => {
     div = addTextDiv();
     time = localTime();
 
-    let reply = "<p>" + time + " - " + _strReply;
-    console.log(reply);
+    let reply = "<p id='reply'>" + _strReply + "</p>";
+    // console.log(reply);
 
     if (isfound === true) {
-        reply += "<br/> <img src=" + map_url + " alt='Static Google Map' title='Google Map'/>";
-
-        console.log(reply);
+        reply += "<img style='border-radius:12px' src=" + map_url + " alt='Static Google Map' title='Google Map'/><br/>";
     }
-    reply += "</p>";
-    console.log(reply);
+    reply += "<span class=time>" + time + "</span>";
+    // console.log(reply);
 
     div.innerHTML = reply;
 
