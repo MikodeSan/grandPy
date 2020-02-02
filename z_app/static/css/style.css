@@ -14,7 +14,10 @@ style.css
     src: url('underwood_champion-webfont.woff');
 }
 
-html,
+html {
+    height: 100%;
+}
+
 body {
     font-family: underwood_champion-webfont, actionman_regular_macroman, Candara, "Comic Sans MS", Calibri, Verdana, "Tempus Sans ITC", "Trebuchet MS", Helvetica, Arial, serif, sans-serif;
     color: Ivory;
@@ -69,9 +72,12 @@ body {
     /*[320x200] / [320x240] / [480x320] iPhone 1 / [960x640]  iPhone 3G*/
     /* width: 320; 640; 768; 900; 960; 1024; 1080; 1280; 1440; 1920; 2048; 2560; 3440; 3840; 4096 */
     min-width: 320px;
+    height: 100%;
     min-height: 100%;
     padding: 0;
     margin: 0;
+    display: flex;
+    flex-direction: column;
     /* border: solid ivory; */
 }
 
@@ -132,6 +138,10 @@ h2 {
     border: solid ivory;
 }
 
+.element:nth-child(2) {
+    flex: 1;
+}
+
 #app_section {
     font-size: medium;
     background-color: black;
@@ -140,14 +150,20 @@ h2 {
     min-width: 320px;
     max-width: 1080px;
     /* Firefox */
-    height: -moz-calc(100% - 256px);
+    /* height: -moz-calc(100% - 256px); */
     /* Chrome, Safari */
-    height: -webkit-calc(100% - 256px);
+    /* height: -webkit-calc(100% - 256px); */
     /* IE9+ and future browsers */
-    height: calc(100% - 256px);
-    min-height: 240px;
+    /* height: calc(100% - 256px); */
+    /* min-height: 240px; */
+    /* Seul ce bloc sera aligné à la fin */
+    /* flex: 3; */
     margin: auto;
     /* border: solid ivory; */
+}
+
+.app_section_cls:nth-child(1) {
+    flex: 1;
 }
 
 .app_div {
