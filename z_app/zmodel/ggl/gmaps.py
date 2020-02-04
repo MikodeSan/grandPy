@@ -107,7 +107,7 @@ class ZGMaps:
         pin = "color:blue|label:P|{},{}".format(_latitude, _longitude)
         print(pin)
         markers.append(pin)
-        params = {'center': loc, 'zoom': 15, 'size': size, 'maptype': 'roadmap', 'markers': markers, 'key': self.__key}
+        params = {'center': loc, 'zoom': 15, 'size': size, 'maptype': 'roadmap', 'markers': markers, 'key': ""}#self.__key}
         url = self.__GMAPS_STATIC_MAP_URL__ + urllib.parse.urlencode(params, doseq=True)
         # print(url)
         return url

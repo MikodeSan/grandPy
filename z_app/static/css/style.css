@@ -14,7 +14,11 @@ style.css
     src: url('underwood_champion-webfont.woff');
 }
 
-html,
+html {
+    height: 100%;
+    /* border: solid ivory; */
+}
+
 body {
     font-family: underwood_champion-webfont, actionman_regular_macroman, Candara, "Comic Sans MS", Calibri, Verdana, "Tempus Sans ITC", "Trebuchet MS", Helvetica, Arial, serif, sans-serif;
     color: Ivory;
@@ -68,17 +72,24 @@ body {
     Aquamarine 	#7FFFD4 */
     /*[320x200] / [320x240] / [480x320] iPhone 1 / [960x640]  iPhone 3G*/
     /* width: 320; 640; 768; 900; 960; 1024; 1080; 1280; 1440; 1920; 2048; 2560; 3440; 3840; 4096 */
+    width: 100%;
     min-width: 320px;
-    min-height: 100%;
+    height: 100%;
+    max-height: 100%;
     padding: 0;
     margin: 0;
+    display: flex;
+    flex-direction: column;
+    overflow: auto;
     /* border: solid ivory; */
 }
 
 header,
 footer {
-    font-size: large;
+    font-size: larger;
     background-color: slategrey;
+    /* width: 100%; */
+    height: fit-content;
     min-height: 128px;
     max-height: 192px;
     /* border: solid ivory; */
@@ -138,35 +149,48 @@ h2 {
     /* width: 100%; */
     /* width: 320; 640; 768; 900; 960; 1024; 1080; 1280; 1920 */
     min-width: 320px;
-    max-width: 1080px;
+    max-width: 720px;
     /* Firefox */
-    height: -moz-calc(100% - 256px);
+    /* height: -moz-calc(100% - 256px); */
     /* Chrome, Safari */
-    height: -webkit-calc(100% - 256px);
+    /* height: -webkit-calc(100% - 256px); */
     /* IE9+ and future browsers */
-    height: calc(100% - 256px);
-    min-height: 240px;
+    /* height: calc(100% - 256px); */
+    /* min-height: 240px; */
+    max-height: 1024px;
+    /* Seul ce bloc sera aligné à la fin */
+    flex: 1;
+    display: flex;
+    flex-direction: column;
     margin: auto;
-    /* border: solid ivory; */
+    border: solid ivory;
 }
+
+
+/* .app_section_cls:nth-child(1) {
+    flex: 1;
+    border: solid ivory;
+} */
 
 .app_div {
     word-wrap: break-word;
-    overflow: auto;
+    /* overflow: auto; */
     border-radius: 12px;
-    /* border: solid ivory; */
+    border: solid ivory;
 }
 
 #dialog {
     /* height: 60%; */
     min-height: 200px;
-    max-height: 600px;
+    max-height: 100%;
     margin-bottom: 16px;
+    /* height: calc(100% - 256px); */
+    flex: 1;
+    overflow: auto;
     /* border: solid ivory; */
 }
 
 #user_input {
-    /* height: 24px; */
     text-align: right;
     padding: 0px;
     /* border: solid red; */
@@ -177,6 +201,7 @@ h2 {
 }
 
 #user_input_p {
+    display: flex;
     margin: 0px
 }
 
@@ -185,11 +210,22 @@ h2 {
     font-size: medium;
     color: ivory;
     background: DarkGrey;
+    flex: 1;
+    height: auto;
     padding-left: 12px;
     padding-right: 12px;
     padding-top: 3px;
     padding-bottom: 3px;
-    border-radius: 50px;
+    margin-right: 7px;
+    border-radius: 12px;
+}
+
+input:focus {
+    outline: none;
+}
+
+#submitImage {
+    margin-right: 7px;
 }
 
 .query_style {
@@ -201,6 +237,7 @@ h2 {
 }
 
 #query {
+    font-size: medium;
     text-align: right;
     background: darkblue;
     padding-left: 12px;
@@ -221,6 +258,7 @@ h2 {
 }
 
 #reply {
+    font-size: medium;
     text-align: left;
     background: dimgrey;
     padding-left: 12px;
