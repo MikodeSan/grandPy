@@ -34,7 +34,7 @@ const addReply = (_strReply, isfound, map_url) => {
     // console.log(reply);
 
     if (isfound === true) {
-        reply += "<img style='border-radius:12px' src=" + map_url + " alt='Static Google Map' title='Google Map'/><br/>";
+        reply += "<img style='border-radius:12px' src=" + map_url + key + " alt='Static Google Map' title='Google Map'/><br/>";
     }
     reply += "<span class=time>" + time + "</span>";
     // console.log(reply);

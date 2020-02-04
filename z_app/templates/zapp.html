@@ -23,6 +23,7 @@
 <script type="text/javascript" src="{{url_for('static', filename='js/zajax.js')}}"></script>
 <script type="text/javascript">
     var parse_url = "{{ url_for(config['ZPARSER_URI']) }}";
+    var key = "{{ config['GMAPS_KEY'] }}";
     var welcome = "{{welcome}}"
 </script>
 <script type="text/javascript" src="{{url_for('static', filename='js/zapp.js')}}"></script>
