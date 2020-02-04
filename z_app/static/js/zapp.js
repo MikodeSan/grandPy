@@ -13,7 +13,7 @@ document.addEventListener('readystatechange', event => {
     }
 });
 
-const dialog = document.getElementById('dialog');
+var dialog = document.getElementById('dialog');
 
 
 const addQuery = (_strUserQuery) => {
@@ -92,13 +92,17 @@ async function getAddress(reply_json) {
     // console.log('isdone =' + isDone);
     // isDone = false;
 
-
     addReply(reply, isfound, map_url);
 
     if (data.description) {
         addReply("Mais laisse moi te parler d'une chose assez étonnante non loin de là", false, "");
         addReply(data.description, false, "");
     }
+
+    setTimeout(function() {
+        dialog_auto_scroll()
+    }, 750);
+    // dialog_auto_scroll();
 }
 
 const userInput_form = document.getElementById('user_input_form');
@@ -134,6 +138,8 @@ userInput_form.addEventListener('submit', function(event) {
         // avatarElt.style.height = "150px";
         // avatarElt.style.width = "150px";
 
+        dialog_auto_scroll();
+
         let data = new FormData(userInput_form);
 
         zajaxPost(parse_url, data, getAddress, remove_maps_loader, false);
@@ -141,6 +147,19 @@ userInput_form.addEventListener('submit', function(event) {
         userText_form.value = "";
     }
 });
+
+const dialog_auto_scroll = () => {
+    console.log("auto-scroll");
+    var dialog = document.getElementById('dialog');
+    console.log(dialog.scrollTop);
+    console.log(dialog.scrollHeight);
+    console.log(dialog.clientHeight);
+
+    dialog.scrollTop = dialog.scrollHeight - dialog.clientHeight;
+    console.log(dialog.scrollTop);
+
+}
+
 
 const remove_maps_loader = () => {
 
