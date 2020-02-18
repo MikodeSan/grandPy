@@ -1,95 +1,118 @@
-# grandPy
+# Grand-Py web application
 
-This is the documentation of the project __Grand Py__
+## Context
 
-Open Food Facts is the exclusive source of the data, any additions will be shared and back to the community under the OdBL licence.
+The application allows to find the address of a place specified by the user and give also a little description of an interesting site around. The Google Maps and Wiki Media services is used.
 
-## Installation
+## Features
 
-### Database
-* Download and install MySQL
-* Create database '__openfacts__' 
-* Create user '_app_' with password '_No@app23_' on localhost with GRANT ALL PRIVILEGES on '__openfacts__' database 
+- __Navigation__: From the '_Home_' page, Go to the '_app_' page by clicking on the link and see the application interface.
+- __Dialog view__: As a user, I want to see my query displayed into the dialog field by press 'Enter' key and without refresh the web page
+  - récupération de la requete
+  - affichage requête + réponse dans la zone de dialogue
+  - spinner / loader attente réponse
+- __Identification of the specified place__:
+  - Analyse requête, identification adresse
+    - stop word
+- __Location__: As a user, I want to get the address and coordonate of a specified place
+  - Address
+  - Map: get the location displayed into a map
+    - format de la map
+      - taille + pin
+      - retour de l'adresse sans la clé
+  - interogation GMAPS geocode
+    - adresse formaté + géocode: longitude + latitude
+  - interogation GMAPS static map
+  - retour réponse par JSON
+  - Réponse aléatoire
+- __Place description__: get description of the specified address
+  - interogation WIKI avec geocode
+    - récupère site par ordre de proximité
+    - sélection aléatoire parmi les 7 premiers sites
+    - extraction de la descripion du site , mes 3 premières phrases
+    - suppression des titres, pour les pages tres courtes
+- __Online hosting__
+  - As a user, I want to access the app/site on web > Prod
+    - configure heroku
+    - variable d'environnement : clé google
 
-### virtual environment
-* Create virtual environment named '_env_' for example
-* Activate the new environment
-* install requirements from '_requirements.txt_'
+## Architecture
 
-### Run application
-execute : python '_opynfacts.py_'
+### Front-end
 
-## Features (Release / Story)
+#### HTMM/CSS
 
-* As a user, I want to Initialize/Update database with French products coming from OpenFoodFacts
-  * Initialize db
-  * Download list of categories
-  * Store categories into db
-  * Download list of products for each specified category
-  * Extract product data
-  * Store only new product data
-  * Set Category/Product Relation
-  * Store Category/Product relation for only new relation 
-  * Set db as completed
+Mise en page
 
-* As a user, I want to see all stored products by category
-  * Populate/Display category list
-  * Select all categories as default
-  * Populate/Display products list
-  * Select a set of category by clicking
-  * Populate/Display products list related to selected category
+- header : logo et phrase d'accroche
+- zone centrale :
+  - zone vide (qui servira à afficher le dialogue)
+  - champ de formulaire pour envoyer une question.
+- footer
 
-* As a user, I want to Select a stored product and see its characteristics
-  * Product Selection
-  * Display Product description
+  - votre prénom & nom
+  - lien vers votre
+    - repository Github
+    - réseaux sociaux
 
-* As a user, I want to find alternative product according to '_nutri score_' and '_nova_group_'
-  * Check the categogy hierarchy where my selected product is included
-  * Select a categogy to find an alternative product
-  * Find a substitute under the same category
-    * Get alternative food criteria by successive priority: '_nutri score_' then '_nova_group_'
-  * Display alternative
+- Responsive
+  - utilisation des tailles min max
+  - block flex
 
-* As a user, I want to store and restore my favorite alternative food/product
-  * Set selected product as favorite by click on button '_>>_'
-  * Populate/Display favorite list
-    * Get all product set as favorite 
-  * Remove selected product from favorite list by click on button '_<<_'
+#### JavaScript
 
-<!--
-* As a user, at first I want to get the categories list from Open Food Facts and secondly get the products list from the selected category.
-  * Model
-    * Get data from openXfacts site
-      * use the openfoodfacts API
-    * Get data from db
-* As a user, I want to find alternative product according to __some criterias to define__
-  * Check the categogy hierarchy where my selected product is included.
-  * Select a categogy to find an alternative product.
-* As a user, I want to store and restore my data into database
-  * system use a MySQL DB
-    * Create db
-    * Initialize db
-      * Store categories data into db
-* As a user, I want to use a GUI to interact with db
+Interactions en AJAX
+fonction post et get avec callback
 
-### tasks
+sans recharger la page > innerHTML
+ajoute block et text dynamiquement
 
-* sub-task
+### Back-end
+
+#### Analyse de requete
+
+#### interaction Google Maps
+
+#### Intéraction Media Wiki
 
 ## Algorithm
 
+reponse aléatoire
+
 ## Workflow
 
-* Activity diagram
-* Processus
+- Activity diagram
+- Processus
 
 ## Difficulty
 
-* Solution
+- Solution
 
--->
+## Intégration continue
+
+Tests unitaires
+
+- mock
+
+couverture
+linter
+
+## Installation
+
+### Virtual environment
+
+- Create virtual environment named '_venv_' for example
+- Activate the new environment
+- install requirements from '_requirements.txt_'
+
+### Flask
+
+### Run application
+
+execute : python '_run.py_'
 
 ## Links
 
-Trello: https://trello.com/b/LZOSEDow/opynfacts
-Github: https://github.com/MikodeSan/OpyFoodFacts
+- Webapp: https://z-grand-py.herokuapp.com/zapp
+- PivotalTracker: https://www.pivotaltracker.com/n/projects/2419153
+- Github: https://github.com/MikodeSan/grandPy

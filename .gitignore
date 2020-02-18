@@ -165,3 +165,4 @@ fbapp/static/*.jpg
 app.db
 geckodriver.log
 .cache/
+/README.pdf
