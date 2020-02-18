@@ -6,60 +6,35 @@ The application allows to find the address of a place specified by the user and 
 
 ## Features
 
-- __Navigation__: From the '_Home_' page, Go to the '_app_' page by clicking on the link and see the application interface.
-- __Dialog view__: As a user, I want to see my query displayed into the dialog field by press 'Enter' key and without refresh the web page
-  - récupération de la requete
-  - affichage requête + réponse dans la zone de dialogue
-  - spinner / loader attente réponse
-- __Identification of the specified place__:
-  - Analyse requête, identification adresse
-    - stop word
-- __Location__: As a user, I want to get the address and coordonate of a specified place
-  - Address
-  - Map: get the location displayed into a map
-    - format de la map
-      - taille + pin
-      - retour de l'adresse sans la clé
-  - interogation GMAPS geocode
-    - adresse formaté + géocode: longitude + latitude
-  - interogation GMAPS static map
-  - retour réponse par JSON
-  - Réponse aléatoire
-- __Place description__: get description of the specified address
-  - interogation WIKI avec geocode
-    - récupère site par ordre de proximité
-    - sélection aléatoire parmi les 7 premiers sites
-    - extraction de la descripion du site , mes 3 premières phrases
-    - suppression des titres, pour les pages tres courtes
-- __Online hosting__
-  - As a user, I want to access the app/site on web > Prod
-    - configure heroku
-    - variable d'environnement : clé google
+- __Navigation__: From the '_Home_' page, the '_App_' page is displayed by clicking on a link.
+- __Dialog view__: The user's query is keyed into a text input field and a dialog box displays the user's query and Grand-Py's reply like a chat messages.
+- __Identification of the searched place__: the specified place is identified from the user's query sentence.
+- __Localization__: Find the address, the coordinate and the map of a specified place.
+- __Place description__: Get description of a point of interest near the specified place.
+- __Online hosting__: Access the online web application.
 
 ## Architecture
 
 ### Front-end
 
-#### HTMM/CSS
+#### HTMM / CSS
 
-Mise en page
+##### Body layout
 
-- header : logo et phrase d'accroche
-- zone centrale :
-  - zone vide (qui servira à afficher le dialogue)
-  - champ de formulaire pour envoyer une question.
-- footer
-
-  - votre prénom & nom
-  - lien vers votre
-    - repository Github
-    - réseaux sociaux
-
-- Responsive
-  - utilisation des tailles min max
-  - block flex
+- Header: Logo, title and pickupline
+- Central zone content:
+  - The Dialog box is a void zone displaying and distinguishing Grand-Py and user messages.
+    - Spinner / Loader is an infinite loop animation coordinated by keyframes. The animation will be interrupted asynchronously according to AJAX request.
+  - The query field is compounded of a text input to keyed the query and a submit button to validate and send the user's query.
+- Footer:
+  - Names
+  - Link: contact, source code (Github repository), project plan, social network.
+- Responsiveness: Define maximal and minimal block size and use CSS flex property.
 
 #### JavaScript
+
+- press 'Enter' key and without refresh the web page
+  - récupération de la requete
 
 Interactions en AJAX
 fonction post et get avec callback
@@ -71,9 +46,35 @@ ajoute block et text dynamiquement
 
 #### Analyse de requete
 
+- Analyse requête, identification adresse
+  - stop word
+
 #### interaction Google Maps
 
+- Address
+- Map: get the location displayed into a map
+  - format de la map
+    - taille + pin
+    - retour de l'adresse sans la clé
+  - interogation GMAPS geocode
+    - adresse formaté + géocode: longitude + latitude
+  - interogation GMAPS static map
+  - retour réponse par JSON
+  - Réponse aléatoire
+
 #### Intéraction Media Wiki
+
+- interogation WIKI avec geocode
+  - récupère site par ordre de proximité
+  - sélection aléatoire parmi les 7 premiers sites
+  - extraction de la descripion du site , mes 3 premières phrases
+  - suppression des titres, pour les pages tres courtes
+
+#### Hosting
+
+- As a user, I want to  > Prod
+  - configure heroku
+  - variable d'environnement : clé google
 
 ## Algorithm
 

@@ -166,3 +166,4 @@ app.db
 geckodriver.log
 .cache/
 /README.pdf
+/README_tmp.html
