@@ -17,9 +17,7 @@ The application allows to find the address of a place specified by the user and 
 
 ### Front-end
 
-#### HTMM / CSS
-
-##### Body layout
+#### HTML / CSS: Content and layout
 
 - Header: Logo, title and pickupline
 - Central zone content:
@@ -31,7 +29,7 @@ The application allows to find the address of a place specified by the user and 
   - Link: contact, source code (Github repository), project plan, social network.
 - Responsiveness: Define maximal and minimal block size and use CSS flex property.
 
-#### JavaScript
+#### JavaScript: dynamic update of the application view and interface (data exchange) with the back-end
 
 - press 'Enter' key and without refresh the web page
   - récupération de la requete
@@ -70,24 +68,13 @@ ajoute block et text dynamiquement
   - extraction de la descripion du site , mes 3 premières phrases
   - suppression des titres, pour les pages tres courtes
 
+#### random reply
+
 #### Hosting
 
 - As a user, I want to  > Prod
   - configure heroku
   - variable d'environnement : clé google
-
-## Algorithm
-
-reponse aléatoire
-
-## Workflow
-
-- Activity diagram
-- Processus
-
-## Difficulty
-
-- Solution
 
 ## Intégration continue
 
