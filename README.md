@@ -24,21 +24,15 @@ The application allows to find the address of a place specified by the user and 
   - The Dialog box is a void zone displaying and distinguishing Grand-Py and user messages.
     - Spinner / Loader is an infinite loop animation coordinated by keyframes. The animation will be interrupted asynchronously according to AJAX request.
   - The query field is compounded of a text input to keyed the query and a submit button to validate and send the user's query.
-- Footer:
-  - Names
-  - Link: contact, source code (Github repository), project plan, social network.
-- Responsiveness: Define maximal and minimal block size and use CSS flex property.
+- Footer: Names and links to contact, source code (Github repository), project plan and social network.
+- Responsiveness: Maximal and minimal block size are defined and CSS flex property is used to stretch block if necessary.
 
-#### JavaScript: dynamic update of the application view and interface (data exchange) with the back-end
+#### JavaScript: Dynamic update of the application view and interface (data exchange) with the back-end
 
-- press 'Enter' key and without refresh the web page
-  - récupération de la requete
+On submit event (~~enter key pressed or submit image click~~), the user's query is catched from input form and displayed into the dialog box as a text block. The ```innerHTML``` method is used to update the view content without refresh the web page.
+Then, a spinner animation is started to simulate Grand-Py's reflection at the same time the query is sent as form data to flask server via a AJAX post request.
 
-Interactions en AJAX
-fonction post et get avec callback
-
-sans recharger la page > innerHTML
-ajoute block et text dynamiquement
+When the response is received asynchronously from the server, the callback function extracts the received JSON-formatted data and displays the Grand-Py's reply and the defined map if necessary into the dialog box.
 
 ### Back-end
 
