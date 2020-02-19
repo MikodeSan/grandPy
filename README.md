@@ -29,30 +29,32 @@ The application allows to find the address of a place specified by the user and 
 
 #### JavaScript: Dynamic update of the application view and interface (data exchange) with the back-end
 
-On submit event (~~enter key pressed or submit image click~~), the user's query is catched from input form and displayed into the dialog box as a text block. The ```innerHTML``` method is used to update the view content without refresh the web page.
+On submit event (~~enter key pressed or submit image click~~), the user's query is catched from input form and displayed into the dialog box as a text block. The `innerHTML` method is used to update the view content without refresh the web page.
 Then, a spinner animation is started to simulate Grand-Py's reflection at the same time the query is sent as form data to flask server via a AJAX post request.
 
 When the response is received asynchronously from the server, the callback function extracts the received JSON-formatted data and displays the Grand-Py's reply and the defined map if necessary into the dialog box.
 
 ### Back-end
 
-#### Analyse de requete
+#### Query analysis: identification of requested place
 
-- Analyse requête, identification adresse
-  - stop word
+The goal is to identify the requested place from the user's query sent by the front-end side.
 
-#### interaction Google Maps
+The punctuations signs defined in the `string` class and the most common [_French_ stop words](https://github.com/6/stopwords-json/blob/master/dist/fr.json) are discarded from the sentence. In addition, a list of specific stop words such as [adresse, situe, où est, trouve, cherche, aller, connais] are defined to delimit text block that could be a requested place.
+Finally, the only one remaining text block is considered as the searched location. If more than one text block are remaining, a random pre-defined Grand-Py's reply is returned to the front-end, telling the query is not understood.
 
-- Address
-- Map: get the location displayed into a map
-  - format de la map
-    - taille + pin
-    - retour de l'adresse sans la clé
-  - interogation GMAPS geocode
-    - adresse formaté + géocode: longitude + latitude
-  - interogation GMAPS static map
-  - retour réponse par JSON
-  - Réponse aléatoire
+#### Localization of a specified place/site
+
+#### Geocoding
+
+The [Google Maps Geocoding API](https://developers.google.com/maps/documentation/geocoding) is used to locate the identified place.  
+The site name is sent to the geocoding service via a HTTP request, as a result the standard address and the coordinates (longitude/latitude) are returned as JSON-formatted data.
+In order to improve localization result, taking into account that the user is French, the local language as '_french_' and the preferential search region as ccTLD code '_fr_' are also specified to the service.
+
+#### Map
+
+Knowing the geocode (coodinates), the relative map can be got sending a HTTP request to the [Google Maps Static API](https://developers.google.com/maps/documentation/maps-static). By specifying to the service some parameters like image size, zoom level and coordinates of the pin, as a result the image url of a static map (non-interactive) are returned.  
+Then this url can be transfered to the front-end side (without the Google key for security).
 
 #### Intéraction Media Wiki
 
