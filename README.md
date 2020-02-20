@@ -53,18 +53,18 @@ In order to improve localization result, taking into account that the user is Fr
 
 #### Map
 
-Knowing the geocode (coodinates), the relative map can be got sending a HTTP request to the [Google Maps Static API](https://developers.google.com/maps/documentation/maps-static). By specifying to the service some parameters like image size, zoom level and coordinates of the pin, as a result the image url of a static map (non-interactive) are returned.  
+By Knowing the geocode (coodinates), the relative map can be got sending a HTTP request to the [Google Maps Static API](https://developers.google.com/maps/documentation/maps-static). By specifying to the service some parameters like image size, zoom level and coordinates of the pin, as a result the image url of a static map (non-interactive) are returned.  
 Then this url can be transfered to the front-end side (without the Google key for security).
 
 #### Intéraction Media Wiki
 
-- interogation WIKI avec geocode
-  - récupère site par ordre de proximité
-  - sélection aléatoire parmi les 7 premiers sites
-  - extraction de la descripion du site , mes 3 premières phrases
-  - suppression des titres, pour les pages tres courtes
+The geocode is also used to get back points of interest from [MediaWiki service](https://www.mediawiki.org/wiki/API:Main_page). By sending to the service a HTTP `GET` request as `action query`, specifying the _coordinates_ and the _maximal perimeter_, a list of Wikipedia page identifiers is returned sorted by distance from specified coordinates. So, a random page can be selected in order to return Grand-Py's replies more diversified for the same user's query.
+
+With another request speciying the selected _page identifier_, the page text of the point of interest is returned. So, by discarding titles, the first sentences is extracted and used to complete the Grand-Py's reply to the user.
 
 #### random reply
+
+For each Grand-Py's reply, predefined text is randomly selected to embellish the information returned to the user.
 
 #### Hosting
 
@@ -97,6 +97,6 @@ execute : python '_run.py_'
 
 ## Links
 
-- Webapp: https://z-grand-py.herokuapp.com/zapp
-- PivotalTracker: https://www.pivotaltracker.com/n/projects/2419153
-- Github: https://github.com/MikodeSan/grandPy
+- [Webapp](https://z-grand-py.herokuapp.com/zapp)
+- [PivotalTracker](https://www.pivotaltracker.com/n/projects/2419153)
+- [Github](https://github.com/MikodeSan/grandPy)
