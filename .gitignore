@@ -167,3 +167,4 @@ geckodriver.log
 .cache/
 /README.pdf
 /README_tmp.html
+/param.py
