@@ -2,7 +2,6 @@ import os
 from flask import url_for
 from sqlalchemy import create_engine
 
-import param
 
 # import psycopg2
 # conn_string = "host='localhost' dbname='my_database' user='postgres' password='secret'"
@@ -23,6 +22,8 @@ if os.environ.get('DATABASE_URL'):
 
 # dev environment
 else:
+    import param
+
     basedir = os.path.abspath(os.path.dirname(__file__))
     SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(basedir, 'app.db')
 
