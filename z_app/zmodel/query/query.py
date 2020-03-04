@@ -14,7 +14,8 @@ class ZQuery:
         self.spot = self.extract_place()
 
     def extract_place(self):
-
+        """ Identify and extract the specified place from user's query """
+        
         spot = ""
 
         # Replace address stop word by defined separator
@@ -60,100 +61,9 @@ class ZQuery:
 
         return address_lst
 
-        # Find address part from quote 
-
-        # if len(strdata) > 1:
-
-        #     print(strdata)
-
-        #     spot = strdata[1]
-        #     print("Query address:", spot)
-
-        #     # Replace punctuation by space
-        #     self.remove_punctuation(spot)
-            
-        #     print("Final spot", spot);
-
-        # return spot
-
-    # def extract_place(self):
-
-    #     spot = ""
-
-    #     # Find address part from quote 
-    #     self.quote
-
-    #     # spot = self.quote
-
-
-    #     # # Remove stopwords
-    #     # word_lst = spot.split();
-    #     # print("Split", word_lst)
-
-    #     # spot = ''.join([w + " " for w in word_lst if w not in self._STOP_WORD_FR_LIST_] )
-    #     # print(spot)
-
-    #     strdata = self.quote.split("adresse ", 1)
-
-    #     if len(strdata) > 1:
-
-    #         print(strdata)
-
-    #         spot = strdata[1]
-    #         print("Query address:", spot)
-
-    #         # Replace punctuation by space
-    #         self.remove_punctuation(spot)
-    
-    #         # print("Punctuation", string.punctuation)
-    #         # exclude = set(string.punctuation)
-    #         # spot = ''.join(ch if ch not in exclude else " " for ch in spot)
-
-    #         # if spot[-1] == " ":
-    #         #     spot.pop()            
-                
-    #         # Remove stopwords
-    #         word_lst = spot.split();
-    #         print("Split", word_lst)
-
-    #         print("Final spot", spot);
-
-    #         ## Some alternative examples
-    #         ### 1.
-    #         # s.translate(None, string.punctuation)
-    #         ### 2.
-    #         # s.translate(str.maketrans('', '', string.punctuation))
-    #         ### 3. translate is the best
-    #         # import re, string, timeit
-
-    #         # s = "string. With. Punctuation"
-    #         # exclude = set(string.punctuation)
-    #         # table = string.maketrans("","")
-    #         # regex = re.compile('[%s]' % re.escape(string.punctuation))
-
-    #         # def test_set(s):
-    #         #     return ''.join(ch for ch in s if ch not in exclude)
-
-    #         # def test_re(s):  # From Vinko's solution, with fix.
-    #         #     return regex.sub('', s)
-
-    #         # def test_trans(s):
-    #         #     return s.translate(table, string.punctuation)
-
-    #         # def test_repl(s):  # From S.Lott's solution
-    #         #     for c in string.punctuation:
-    #         #         s=s.replace(c,"")
-    #         #     return s
-
-    #         # print "sets      :",timeit.Timer('f(s)', 'from __main__ import s,test_set as f').timeit(1000000)
-    #         # print "regex     :",timeit.Timer('f(s)', 'from __main__ import s,test_re as f').timeit(1000000)
-    #         # print "translate :",timeit.Timer('f(s)', 'from __main__ import s,test_trans as f').timeit(1000000)
-    #         # print "replace   :",timeit.Timer('f(s)', 'from __main__ import s,test_repl as f').timeit(1000000)
-
-    #     return spot
-
     def remove_punctuation(self, _str, _char=" "):
-        # Replace punctuation by space
+        """ Replace punctuation by space """
+
         # print("Punctuation", string.punctuation)
         exclude = set(string.punctuation)
         quote = ''.join(ch if ch not in exclude else _char for ch in _str)

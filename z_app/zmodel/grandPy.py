@@ -23,18 +23,16 @@ _WELCOME_ = ["ravis de te revoir", "ça me fait tellement plaisir de te revoir",
 _PROPOSAL_ = ["quel endroit cherches-tu cette fois", "quel lieu souhaites-tu visiter cette fois-ci", "où souhaites-tu aller aujourd'hui"]
 
 _INTERLOCUTION_ = ["Ho Hoo", "Ah oui ?", "Voyez-vous ça", "Hmmm", "Aaahh", "Oh très bien"]
-# _INTERLOCUTION_ = ["Ho Hoo", "Ah oui ?", "Voyez-vous ça", "Hmmm", "Aaahh"]
 
 _QUESTION_ = ["tu cherches", "tu veux savoir où se situe", "tu connais l'adresse de", "tu demandes où est"]
 
 _EXCUSE_ = ["Houlala", "Aïe aïe aïe", "Excuse moi", "Hooo désolé"]
 _EXCUSE_2_ = ["Je n'ai pas bien compris", "j'ai mal entendu", "j'ai dû loupé quelques mots", "je crois que je n'ai plus les oreilles de ma jeunesse"]
 _REFORM_ = ["peux-tu reformuler ta question", "peux-tu reprendre plus simplement pour ton petit grand-py chéri", "où veux-tu aller", "redis moi ça s'il te plait", "plus doucement s'il te plait", "s'il te plait, parle moins vite"]
-# _EXCUSE_ = ["Houlala", "Aïe Aïe", "Excuse moi", "Hooo Désolé"]
-# _EXCUSE_ = ["Houlala", "Aïe Aïe", "Excuse moi", "Hooo Désolé"]
 
 
 def zparse(query, key):
+    """ Find place geocoding, get static map and description then format replies """
 
     place_lst = []
 
@@ -56,7 +54,6 @@ def zparse(query, key):
         is_understood = True
     else:
         geocoding_dct['reply'] = many_place(place)
-
 
     if is_understood:
 
@@ -104,6 +101,7 @@ def zparse(query, key):
 
 
 def welcome():
+    """ Define welcome reply """
 
     hello = random.choice(_HELLO_)
     nick = random.choice(_NICK_NAME_)
@@ -114,6 +112,7 @@ def welcome():
 
 
 def no_place():
+    """ Define 'no place found' reply """
 
     excuse = random.choice(_EXCUSE_)
     nick = random.choice(_NICK_NAME_)
@@ -124,6 +123,7 @@ def no_place():
 
 
 def defined_place(place):
+    """ Define place reply """
 
     interloc = random.choice(_INTERLOCUTION_)
     nick = random.choice(_NICK_NAME_)
@@ -133,6 +133,7 @@ def defined_place(place):
 
 
 def many_place(_place_lst):
+    """ Define 'too places found' reply """
 
     excuse = random.choice(_EXCUSE_)
     nick = random.choice(_NICK_NAME_)
@@ -153,13 +154,6 @@ def many_place(_place_lst):
         s += place
 
     return s
-
-
-def parse():
-
-    print("dummy for test")
-    print("other dummy thing for test")
-    pass
 
 
 if __name__ == "__main__":

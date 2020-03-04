@@ -26,6 +26,7 @@ __GS_LIMIT_MAX__ = 500
 
 
 def wikipedia_request_page_from_geocoding(flatitude, flongitude):
+    """ Get list of wikipedia page identifiers related to the specified geocode """
 
     places_list = []
 
@@ -68,6 +69,7 @@ def wikipedia_request_page_from_geocoding(flatitude, flongitude):
 
 
 def wikipedia_extract_page(pageid):
+    """ Extract description text from the specified wikipedia page """
 
     # cite paradis, paris; pageid 5653202 for test
     description = ""
@@ -139,33 +141,11 @@ def wikipedia_extract_page(pageid):
     return description
 
 
-class ZMediaWiki:
-
-    def __init__(self):
-        pass
-
-    def get(self):
-        """Search for pages by specifying the geographic coordinates"""
-
-        pass
-
-
 if __name__ == "__main__":
 
     import logging as lg
 
-    # logger = logging.getLogger()
-    # formatter = logging.Formatter('P%(process)s-T%(asctime)s-%(name)s-%(levelname)s-%(message)s')
-    # logger.setFormatter(formatter)
-    # logger.setLevel(logging.DEBUG)
     lg.basicConfig(format='P%(process)s-T%(asctime)s.%(msecs)03d-%(name)s-%(levelname)s: %(message)s', datefmt='%H:%M:%S', level=lg.DEBUG)
-
-
-    # logger.critical('critical')
-    # logger.error('error')
-    # logger.warning('warning')
-    # logger.info('info')
-    # logger.debug('debug')
 
     lg.critical('critical')
     lg.error('error')
@@ -174,5 +154,3 @@ if __name__ == "__main__":
     lg.debug('debug')
 
     wikipedia_request_page_from_geocoding(48.8749731, 2.3498414)
-
-    # gmaps_geocoding('cité la meynard', 'azerfghjkl51654mlkghfch')
