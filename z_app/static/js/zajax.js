@@ -2,6 +2,7 @@ function afficher(reponse) {
     console.log(reponse);
 }
 
+/* Generic asynchronous Get request*/
 function zajaxGet(url, callback) {
 
     let request = new XMLHttpRequest();
@@ -23,6 +24,7 @@ function zajaxGet(url, callback) {
     request.send(null);
 }
 
+/* Generic asynchronous Post request*/
 function zajaxPost(url, data, callback, callback_sync, isJson) {
 
     let request = new XMLHttpRequest();
