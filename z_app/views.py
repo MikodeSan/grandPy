@@ -18,25 +18,11 @@ def index():
         Toi, tu sais comment utiliser la console ! Jamais à court d'idées pour réaliser ton objectif, tu es déterminé-e et persévérant-e. Tes amis disent d'ailleurs volontiers que tu as du caractère et que tu ne te laisses pas marcher sur les pieds. Un peu hacker sur les bords, tu aimes trouver des solutions à tout problème. N'aurais-tu pas un petit problème d'autorité ? ;-)
     """
     return render_template('index.html')
-                            # user_name='Julio',
-                            # user_image=url_for('static', filename='img/profile.png'),
-                            # description=description,
-                            # blur=True)
 
 @app.route('/zapp/', methods=['GET', 'POST'])
 def zapp():
 
-    # content = request.json
-    # print(content)
-
-    # data = request.get_json()
-    # print(data)
-
-    # data = request.form
-    # print(data)
-
     user_name = request.args.get('user_name')
-    # user_name = data.get('strUserQuery')
 
     _welcome = grandPy.welcome()
 
@@ -51,14 +37,12 @@ def parse():
 
     data = request.form
     query = data['query_text']
-    # parse query
 
     # set url
     return grandPy.zparse(query, app.config['GMAPS_KEY'])
 
 @app.route('/contents/<content_id>/')
 def contents(content_id):
-    # return '%s' % content_id
     return jsonify({'foo':"tutu"})
 
 

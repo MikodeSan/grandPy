@@ -11,6 +11,7 @@ lg.basicConfig(format='P%(process)s-T%(asctime)s.%(msecs)03d-%(name)s-%(levelnam
 
 
 class ZGMaps:
+    """ Google Maps API processing """
 
     __GMAPS_GEOCODING_URL__ = 'https://maps.googleapis.com/maps/api/geocode/json?'
     __GMAPS_STATIC_MAP_URL__ = 'https://maps.googleapis.com/maps/api/staticmap?'
@@ -22,6 +23,7 @@ class ZGMaps:
         self.__key = _key
 
     def geocoding_request(self, place):
+        """ Get geocoding of place from Google Maps API """
 
         request_url = self.__geocoding_request_url(place)
 
@@ -36,11 +38,6 @@ class ZGMaps:
             lg.debug(str)
 
             if reply_dict['results'] and reply_dict['status'] == "OK":
-
-                # location_dict = reply_dict['results'][0]['geometry']['location']
-                # print(location_dict)
-
-                # gmaps_static_map_request(location_dict, key)
 
                 geocoding_dict = self.__format_geocoding(reply_dict)
             else:
@@ -73,31 +70,8 @@ class ZGMaps:
 
         return geo_dct
 
-    # def static_map_request(self, latitude, longitude):
-
-    #     map_url = self.static_map_request_url(latitude, longitude)
-    #     print(map_url)
-
-    #     # Store static map image into temporary directory
-    #     response = requests.get(map_url, stream=True)
-    #     if response.status_code == 200:
-    #         image_path = self.__TMP_PATH__ + "\{}".format("map.png")
-    #         # print(image_path)
-
-    #         # If file exists, delete it
-    #         if os.path.isfile(image_path):
-    #             os.remove(image_path)
-
-    #         # Create image file from url
-    #         with open(image_path, 'wb') as out_file:
-    #             response.raw.decode_content = True
-    #             shutil.copyfileobj(response.raw, out_file)
-    #     else:
-    #         print('google static map error')
-
-    #     del response
-
     def static_map_request_url(self, _latitude, _longitude):
+        """ Format static map url, specified latitude and longitude """
 
         loc = "{},{}".format(_latitude, _longitude)
         print(loc)
@@ -107,7 +81,7 @@ class ZGMaps:
         pin = "color:blue|label:P|{},{}".format(_latitude, _longitude)
         print(pin)
         markers.append(pin)
-        params = {'center': loc, 'zoom': 15, 'size': size, 'maptype': 'roadmap', 'markers': markers, 'key': ""}#self.__key}
+        params = {'center': loc, 'zoom': 15, 'size': size, 'maptype': 'roadmap', 'markers': markers, 'key': ""}
         url = self.__GMAPS_STATIC_MAP_URL__ + urllib.parse.urlencode(params, doseq=True)
         # print(url)
         return url
